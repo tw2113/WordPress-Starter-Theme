@@ -1,0 +1,15 @@
+
+/** Typography ****************/
+
+h1, h2, h3, h4, h5, h6 { font-weight:bold } /* This helps to identify headings at the initial build stage, so I thought it'd be useful to have it */
+.alert { background:red; color:white } /* 'alert' has a basic style, since it's useful to have it standing out for testing purposes.*/
+select, input, textarea, button { font:99% sans-serif; }
+
+body, select, input, textarea { 
+/* #444 looks better than black*/ 
+    color: #444;
+    font-size: 62.5%; /*allows for Em usage. 1em = 10px and so on*/
+}
+#container {
+	font-size: 16px;
+}
