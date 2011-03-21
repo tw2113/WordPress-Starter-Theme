@@ -7,6 +7,7 @@ Author: Michael Beckwith
 Author URI: http://michaelbox.net
 */
 
+@import "css/fonts.css";
 @import "css/reset.css";
 @import "css/typography.css";
 @import "css/layout.css";
