@@ -239,6 +239,10 @@ function remheadlink() {
 remove_action('wp_head', 'rsd_link');
 remove_action('wp_head', 'wlwmanifest_link');
 }
+//removes Admin bar
+wp_deregister_script('admin-bar');
+wp_deregister_style('admin-bar');
+remove_action('wp_footer','wp_admin_bar_render',1000);
 
 // Includes the widgets.php file that defines all widget based functions. Done to clean up this file
 require_once( TEMPLATEPATH . '/widgets.php' );
