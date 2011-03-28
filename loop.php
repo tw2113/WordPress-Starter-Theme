@@ -57,7 +57,6 @@
         <article id="post-<?php the_ID(); ?>" <?php post_class(); ?> role="article">
     
 	    <?php if ( is_archive() || is_search() ) : // Display excerpts for archives and search. ?>
-		<article role="article">
 			<?php the_excerpt(); ?>
 		<?php else : ?>
 			<?php the_content( __( 'Continue reading &rarr;', 'twentyten' ) ); ?>

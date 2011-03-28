@@ -93,5 +93,5 @@
                     <?php twentyten_posted_in(); ?>
 					<?php edit_post_link( __( 'Edit', 'twentyten' ), ' ', '' ); ?>
 <?php comments_template(); ?>
-
+        </div>
 <?php endwhile; // end of the loop. ?>

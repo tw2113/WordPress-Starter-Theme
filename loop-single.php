@@ -39,5 +39,5 @@
 					<?php next_post_link( '%link', '%title ' . _x( '&rarr;', 'Next post link', 'twentyten' ) . '' ); ?>
 					</footer>
 				<?php comments_template( '', true ); ?>
-
+                </article>
 <?php endwhile; // end of the loop. ?>
