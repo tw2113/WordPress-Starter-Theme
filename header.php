@@ -11,7 +11,7 @@
 <link rel="profile" href="http://microformats.org/profile/hcard" />
 <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
 
-<script src="<?php bloginfo('template_url'); ?>/js/modernizr-1.6.min.js"></script>
+<script src="<?php bloginfo('template_url'); ?>/js/modernizr.custom.js"></script>
 <!--[if (gte IE 6)&(lte IE 8)]>
 	<script type="text/javascript" src="<?php bloginfo( 'template_url'); ?>/js/selectivizr.js"></script>
 	<![endif]--><!--Select-ivizr JS library for CSS3 selectors, DD-PNG fix for IE6-8-->
