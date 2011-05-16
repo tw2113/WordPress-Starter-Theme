@@ -19,14 +19,6 @@
 <link rel="stylesheet" type="text/css" media="all" href="<?php bloginfo( 'stylesheet_url' ); ?>" />
 <!--Extra Stylesheets go below-->
 
-<?php 
-	if(!is_admin()) {
-	wp_deregister_script('jquery');
-	wp_register_script('jquery', ("http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"), false); //Gets put in wp_footer
-	wp_enqueue_script('jquery');
-	}
-?>
-
 <?php wp_head(); ?>
 </head>
 

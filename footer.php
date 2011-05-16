@@ -8,7 +8,7 @@ if ( is_singular() && get_option( 'thread_comments' ) ) {
 	}
 	if(!is_admin()) {
 	wp_deregister_script('jquery');
-	wp_register_script('jquery', ("http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"), false, '1.4.4');
+	wp_register_script('jquery', ("https://ajax.googleapis.com/ajax/libs/jquery/1.6.0/jquery.min.js"), false, '1.6');
 	wp_enqueue_script('jquery');
 	}
 ?>
