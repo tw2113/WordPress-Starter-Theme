@@ -7,8 +7,7 @@ if ( ! function_exists( 'twentyten_setup' ) ):
 function twentyten_setup() {
     
     // Post Format support. You can also use the legacy "gallery" or "asides" (note the plural) categories. More info at http://codex.wordpress.org/Post_Formats
-	add_theme_support( 'post-formats', array( 'aside', 'gallery' ) );
-	
+	add_theme_support( 'post-formats', array( 'aside', 'audio', 'quote', 'link', 'image', 'video' ) );
 	// This theme uses post thumbnails
 	add_theme_support( 'post-thumbnails' );
 
