@@ -13,7 +13,7 @@ html {
 	overflow-y: scroll;
 	}
 
-article, aside, figure, footer, header, hgroup, nav, section {
+article, aside, figure, footer, header, hgroup, nav, section, small {
 	display:block;
 } /*HTML5 ready */
 
