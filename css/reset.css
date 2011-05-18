@@ -14,3 +14,4 @@ q:before, q:after { content:''}
 strong { font-weight:bold }
 em { font-style:italic }
 a img { border:none } /* Gets rid of IE's blue borders */
+html { overflow-y: scroll; -webkit-font-smoothing: antialiased; }
