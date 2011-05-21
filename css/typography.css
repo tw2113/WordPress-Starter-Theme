@@ -2,11 +2,14 @@
 
 /**/
 /** Typography ****************/
-
 h1, h2, h3, h4, h5, h6 { font-weight:bold } /* This helps to identify headings at the initial build stage, so I thought it'd be useful to have it */
 .alert { background:red; color:white } /* 'alert' has a basic style, since it's useful to have it standing out for testing purposes.*/
 select, input, textarea, button { font:99% sans-serif; }
-
+/* These selection declarations have to be separate
+   No text-shadow: twitter.com/miketaylr/status/12228805301
+   Also: hot pink! */
+::-moz-selection { background: #FEA357; color:#fff; text-shadow: none; }
+::selection { background:#FEA357; color:#fff; text-shadow: none; }
 body, select, input, textarea { 
 /* #444 looks better than black*/ 
     color: #444;

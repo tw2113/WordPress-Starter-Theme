@@ -19,39 +19,10 @@ br.clear { clear:both; display:block; height:1px; margin:-1px 0 0 0 } /* Use thi
 /* For IE 6/7 (trigger hasLayout) */
 .lte7 .cf { zoom:1; }
 
-/*Thank you HTML5Boilerplate */
-ul, ol { margin-left: 1.8em; }
-ol { list-style-type: decimal; }
 
-/* Remove margins for navigation lists */
-nav ul, nav li { margin: 0; } 
 
-/* align checkboxes, radios, text inputs with their label
-   by: Thierry Koblentz tjkdesign.com/ez-css/css/base.css  */
-input[type="radio"] { vertical-align: text-bottom; }
-input[type="checkbox"] { vertical-align: bottom; }
-.ie7 input[type="checkbox"] { vertical-align: baseline; }
-.ie6 input { vertical-align: text-bottom; }
 
-/* hand cursor on clickable input elements */
-label, input[type=button], input[type=submit], button { cursor: pointer; }
-/* webkit browsers add a 2px margin outside the chrome of form elements */  
-button, input, select, textarea { margin: 0; }
 
-/* colors for form validity */
-input:valid, textarea:valid   {  }
-input:invalid, textarea:invalid { 
-      border-radius: 1px;
-    -moz-box-shadow: 0px 0px 5px red; 
- -webkit-box-shadow: 0px 0px 5px red; 
-         box-shadow: 0px 0px 5px red;
-}
-.no-boxshadow input:invalid, 
-.no-boxshadow textarea:invalid { background-color: #f0dddd; }
 
-/* make buttons play nice in IE:    
-   www.viget.com/inspire/styling-the-button-element-in-internet-explorer/ */
-button {  width: auto; overflow: visible; }
-/* bicubic resizing for non-native sized IMG: 
-   code.flickr.com/blog/2008/11/12/on-ui-quality-the-little-things-client-side-image-resizing/ */
-.ie7 img { -ms-interpolation-mode: bicubic; }
+
+
