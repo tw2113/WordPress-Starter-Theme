@@ -1,4 +1,6 @@
+/** Put your custom @font-face font declarations in here ****************/
 
+/**/
 /** Typography ****************/
 
 h1, h2, h3, h4, h5, h6 { font-weight:bold } /* This helps to identify headings at the initial build stage, so I thought it'd be useful to have it */
