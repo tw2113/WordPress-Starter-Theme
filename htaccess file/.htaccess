@@ -47,6 +47,44 @@ AddType image/webp                     webp
 AddType text/cache-manifest            manifest
 AddType text/x-component               htc
 AddType application/x-chrome-extension crx
+AddType text/x-vcard                   vcf
+
+
+# ----------------------------------------------------------------------
+# gzip compression
+# ----------------------------------------------------------------------
+
+<IfModule mod_deflate.c>
+
+
+# force deflate for mangled headers developer.yahoo.com/blogs/ydn/posts/2010/12/pushing-beyond-gzipping/
+<IfModule mod_setenvif.c>
+  <IfModule mod_headers.c>
+    SetEnvIfNoCase ^(Accept-EncodXng|X-cept-Encoding|X{15}|~{15}|-{15})$ ^((gzip|deflate)\s,?\s(gzip|deflate)?|X{4,13}|~{4,13}|-{4,13})$ HAVE_Accept-Encoding
+    RequestHeader append Accept-Encoding "gzip,deflate" env=HAVE_Accept-Encoding
+  </IfModule>
+</IfModule>
+# html, txt, css, js, json, xml, htc:
+<IfModule filter_module>
+  FilterDeclare   COMPRESS
+  FilterProvider  COMPRESS  DEFLATE resp=Content-Type /text/(html|css|javascript|plain|x(ml|-component))/
+  FilterProvider  COMPRESS  DEFLATE resp=Content-Type /application/(javascript|json|xml|x-javascript)/
+  FilterChain     COMPRESS
+  FilterProtocol  COMPRESS  change=yes;byteranges=no
+</IfModule>
+
+<IfModule !mod_filter.c>
+  # Legacy versions of Apache
+  AddOutputFilterByType DEFLATE text/html text/plain text/css application/json
+  AddOutputFilterByType DEFLATE text/javascript application/javascript application/x-javascript 
+  AddOutputFilterByType DEFLATE text/xml application/xml text/x-component
+</IfModule>
+
+# webfonts and svg:
+  <FilesMatch "\.(ttf|otf|eot|svg)$" >
+    SetOutputFilter DEFLATE
+  </FilesMatch>
+</IfModule>
 
 # these are pretty far-future expires headers
 # they assume you control versioning with cachebusting query params like
@@ -58,7 +96,6 @@ AddType application/x-chrome-extension crx
 #   "access plus 1 week" or so
 
 <IfModule mod_expires.c>
-  Header set Cache-Control "public"
   ExpiresActive on
 
 # Perhaps better to whitelist expires rules? Perhaps.
@@ -80,30 +117,48 @@ AddType application/x-chrome-extension crx
   ExpiresByType application/rss+xml       "access plus 1 hour"
 
 # favicon (cannot be renamed)
-  ExpiresByType image/vnd.microsoft.icon  "access plus 1 week" 
+  ExpiresByType image/x-icon              "access plus 1 week" 
 
 # media: images, video, audio
-  ExpiresByType image/gif                 "access plus 1 week"
-  ExpiresByType image/png                 "access plus 1 week"
-  ExpiresByType image/jpg                 "access plus 1 week"
-  ExpiresByType image/jpeg                "access plus 1 week"
-  ExpiresByType video/ogg                 "access plus 1 week"
-  ExpiresByType audio/ogg                 "access plus 1 week"
-  ExpiresByType video/mp4                 "access plus 1 week"
-  ExpiresByType video/webm                "access plus 1 week"
+  ExpiresByType image/gif                 "access plus 1 month"
+  ExpiresByType image/png                 "access plus 1 month"
+  ExpiresByType image/jpg                 "access plus 1 month"
+  ExpiresByType image/jpeg                "access plus 1 month"
+  ExpiresByType video/ogg                 "access plus 1 month"
+  ExpiresByType audio/ogg                 "access plus 1 month"
+  ExpiresByType video/mp4                 "access plus 1 month"
+  ExpiresByType video/webm                "access plus 1 month"
   
 # webfonts
-  ExpiresByType font/truetype             "access plus 1 week"
-  ExpiresByType font/opentype             "access plus 1 week"
-  ExpiresByType font/woff                 "access plus 1 week"
-  ExpiresByType image/svg+xml             "access plus 1 week"
-  ExpiresByType application/vnd.ms-fontobject "access plus 1 week"
+  ExpiresByType font/truetype             "access plus 1 month"
+  ExpiresByType font/opentype             "access plus 1 month"
+  ExpiresByType font/woff                 "access plus 1 month"
+  ExpiresByType image/svg+xml             "access plus 1 month"
+  ExpiresByType application/vnd.ms-fontobject "access plus 1 month"
     
 # css and javascript
-  ExpiresByType text/css                  "access plus 2 weeks"
-  ExpiresByType application/javascript    "access plus 2 weeks"
-  ExpiresByType text/javascript           "access plus 2 weeks"
+  ExpiresByType text/css                  "access plus 2 months"
+  ExpiresByType application/javascript    "access plus 2 months"
+  ExpiresByType text/javascript           "access plus 2 months"
+  
+  <IfModule mod_headers.c>
+    Header append Cache-Control "public"
+  </IfModule>
 </IfModule>
+
+# ----------------------------------------------------------------------
+# ETag removal
+# ----------------------------------------------------------------------
+
+# FileETag None is not enough for every server.
+<IfModule mod_headers.c>
+  Header unset ETag
+</IfModule>
+
+# Since we're sending far-future expires, we don't need ETags for
+# static content.
+#   developer.yahoo.com/performance/rules.html#etags
+FileETag None
 
 # use utf-8 encoding for anything served text/plain or text/html
 AddDefaultCharset utf-8
@@ -112,3 +167,9 @@ AddCharset utf-8 .html .css .js .xml .json .rss
 
 # We don't need to tell everyone we're apache.
 ServerSignature Off
+
+# Block access to "hidden" directories whose names begin with a period. This
+# includes directories used by version control systems such as Subversion or Git.
+<IfModule mod_rewrite.c>
+  RewriteRule "(^|/)\." - [F]
+</IfModule>
