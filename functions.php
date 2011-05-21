@@ -270,7 +270,12 @@ function browser_body_class($classes) {
     
     return $classes;
 }
-
+// Customize footer text
+function remove_footer_admin () {
+    //echo "Your own text";
+} 
+ 
+add_filter('admin_footer_text', 'remove_footer_admin');
 /*** Default Settings Cleanup and Adding Goodies **************************/
 
 /*
@@ -281,9 +286,6 @@ remove_action( 'wp_head', 'feed_links', 2 );
 
 //removes version number
 remove_action('wp_head', 'wp_generator');
-
-//removes admin bar by default
-remove_action('init', 'wp_admin_bar_init');
 
 /* adds the favicon/appleicon to the wp_head() call*/
 function blog_favicon() {
