@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <!--[if lt IE 7]><html class="no-js ie6 lte8 lte7" <?php language_attributes(); ?>><![endif]-->
 <!--[if IE 7]><html class="no-js ie7 lte8 lte7" <?php language_attributes(); ?>><![endif]-->
 <!--[if IE 8]><html class="no-js ie8 lte8" <?php language_attributes(); ?>><![endif]-->
