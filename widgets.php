@@ -1,6 +1,8 @@
 <?php
+//Uncomment out the add_actions whenever you want to add one of the functions.
+
 // Widget Sidebar registration line starts on the left, please don't mark outside the circle
-function twentyten_widgets_init() {
+function wpst_widgets_init() {
 	// Area 1, located at the top of the sidebar.
 	register_sidebar( array(
 		'name' => __( 'Primary Widget Area', 'twentyten' ),
@@ -13,15 +15,12 @@ function twentyten_widgets_init() {
 	) );
 }
 /** Register sidebars by running twentyten_widgets_init() on the widgets_init hook. */
-add_action( 'widgets_init', 'twentyten_widgets_init' );
-
-
+add_action( 'widgets_init', 'wpst_widgets_init' );
 
 // Widget registration line starts on the right, do remember that we require ONLY #2 pencils for all your answers
 
-
-//deregisters some widgets that will not be needed ever
-function remove_some_wp_widgets(){
+//deregisters widgets
+function wpst_remove_wp_widgets(){
   unregister_widget('WP_Widget_Archives');
   unregister_widget('WP_Widget_Calendar');
   unregister_widget('WP_Widget_Categories');
@@ -36,14 +35,14 @@ function remove_some_wp_widgets(){
   unregister_widget('WP_Nav_Menu_Widget');
 }
 
-add_action('widgets_init', 'remove_some_wp_widgets', 1);
+//add_action('widgets_init', 'wpst_remove_wp_widgets', 1);
 
-//Widget declaration for the featured wine area of the frontpage
-// Widget declaration copied from previous website project that sells wine. Edit as needed
 /*
-class jcFeaturedwine extends WP_Widget {
-	function jcFeaturedwine() {
-		parent::WP_Widget(false, $name = 'jcFeaturedwine');	
+//Add a proper class name and widget name. Class name is for the extension of the WP_Widget, and for registering the widget.
+
+class class_name extends WP_Widget {
+	function class_name() {
+		parent::WP_Widget(false, $name = 'enter_name');	
 	}
 	
 	function widget($args, $instance) {
@@ -51,18 +50,11 @@ class jcFeaturedwine extends WP_Widget {
 		extract( $args );
 
 		$title = apply_filters('widget_title', $instance['title']);
-		$the_wine_description = $instance['the_wine_description'];
-		$the_wine_pic = $instance['the_wine_pic'];
-		$the_wine_price = $instance['the_wine_price'];
-		$the_ordernow_link = $instance['the_ordernow_link'];
+		$the_description = $instance['the_description'];
+		$the_pic = $instance['the_pic'];
 
-		echo '<div id="featuredwine">
-		<img src="'.$the_wine_pic.'" alt="Our featured wine" />
-		<p class="featuredline">Featured Wine:<br/>
-		<p class="featured_description">'.$the_wine_description.'</p>
-		<p class="featured_price">'.$the_wine_price.'</p>
-		<p class="ordernow"><a href="'.$the_ordernow_link.'" title="Order this wine now">Order now</a></p>
-		</div>';
+		//Output to the front website goes here. Use variables defined above
+		
 	}
 	
 	function update($new_instance, $old_instance) {
@@ -70,10 +62,8 @@ class jcFeaturedwine extends WP_Widget {
 		$instance = $old_instance;
 
 		$instance['title'] = strip_tags($new_instance['title']);
-		$instance['the_wine_description'] = strip_tags($new_instance['the_wine_description']);
-		$instance['the_wine_pic'] = strip_tags($new_instance['the_wine_pic']);
-		$instance['the_wine_price'] = strip_tags($new_instance['the_wine_price']);
-		$instance['the_ordernow_link'] = strip_tags($new_instance['the_ordernow_link']);
+		$instance['the_description'] = strip_tags($new_instance['the_description']);
+		$instance['the_pic'] = strip_tags($new_instance['the_pic']);
 		
 		return $instance;
 	}
@@ -81,21 +71,26 @@ class jcFeaturedwine extends WP_Widget {
 	function form($instance) {
 		//Output the options form in admin
 		$title = $instance['title'];
-		$the_wine_description = $instance['the_wine_description'];
-		$the_wine_pic = $instance['the_wine_pic'];
-		$the_wine_price = $instance['the_wine_price'];
-		$the_ordernow_link = $instance['the_ordernow_link'];
+		$the_description = $instance['the_description'];
+		$the_pic = $instance['the_pic'];
+
 		?>
 		
 		<!--The form that the user has to enter the data-->
-	<p><label for="<?php echo $this->get_field_id('title'); ?>">Widget Title:<input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" placeholder="Title of the widget" type="text" value="<?php echo $title; ?>" /></label></p>
-	<p><label for="<?php echo $this->get_field_id('the_wine_description'); ?>">Wine Description:<input class="widefat" id="<?php echo $this->get_field_id('the_wine_description'); ?>" name="<?php echo $this->get_field_name('the_wine_description'); ?>" placeholder="What type of wine is featured?" type="text" value="<?php echo $the_wine_description; ?>" /></label></p>
-	<p><label for="<?php echo $this->get_field_id('the_wine_pic'); ?>">Picture for the wine:<input class="widefat" id="<?php echo $this->get_field_id('the_wine_pic'); ?>" name="<?php echo $this->get_field_name('the_wine_pic'); ?>" placeholder="Ooh a pretty bottle!" type="text" value="<?php echo $the_wine_pic; ?>" /></label></p>
-	<p><label for="<?php echo $this->get_field_id('the_wine_price'); ?>">Price for the wine:<input class="widefat" id="<?php echo $this->get_field_id('the_wine_price'); ?>" name="<?php echo $this->get_field_name('the_wine_price'); ?>" placeholder="How much is it going to cost me?" type="text" value="<?php echo $the_wine_price; ?>" /></label></p>
-		<p><label for="<?php echo $this->get_field_id('the_ordernow_link'); ?>">Link to inside the store:<input class="widefat" id="<?php echo $this->get_field_id('the_ordernow_link'); ?>" name="<?php echo $this->get_field_name('the_ordernow_link'); ?>" placeholder="Direct me to the wine in the store" type="text" value="<?php echo $the_ordernow_link; ?>" /></label></p>
-		
-	<?php }
+	    <p>
+	    <label for="<?php echo $this->get_field_id('title'); ?>">Widget Title:</label><br/>
+	    <input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" placeholder="Title of the widget" type="text" value="<?php echo $title; ?>" />
+	    </p>
+	    <p>
+	    <label for="<?php echo $this->get_field_id('the_wine_description'); ?>">Wine Description:</label><br/>
+	    <input class="widefat" id="<?php echo $this->get_field_id('the_description'); ?>" name="<?php echo $this->get_field_name('the_description'); ?>" placeholder="" type="text" value="<?php echo $the_description; ?>" />
+	    </p>
+	    <p>
+	    <label for="<?php echo $this->get_field_id('the_wine_pic'); ?>">Picture for the wine:</label><br/>
+	    <input class="widefat" id="<?php echo $this->get_field_id('the_pic'); ?>" name="<?php echo $this->get_field_name('the_pic'); ?>" placeholder="" type="text" value="<?php echo $the_pic; ?>" />
+	    </p>
+    <?php }
 }
-register_widget('jcFeaturedWine');*/
+register_widget('class_name');*/
 
 ?>
