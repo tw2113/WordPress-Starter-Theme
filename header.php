@@ -18,7 +18,16 @@
 
 <link rel="stylesheet" type="text/css" media="all" href="<?php bloginfo( 'stylesheet_url' ); ?>" />
 <!--Extra Stylesheets go below-->
-
+<?php 
+if ( is_singular() && get_option( 'thread_comments' ) ) {
+		wp_enqueue_script( 'comment-reply' );
+	}
+	if(!is_admin()) {
+	wp_deregister_script('jquery');
+	wp_register_script('jquery', ("https://ajax.googleapis.com/ajax/libs/jquery/1.6.0/jquery.min.js"), true, '1.6');
+	wp_enqueue_script('jquery');
+	}
+?>
 <?php wp_head(); ?>
 </head>
 
