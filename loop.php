@@ -107,6 +107,6 @@
 
 <?php /* Display navigation to next/previous pages when applicable */ ?>
 <?php if (  $wp_query->max_num_pages > 1 ) : ?>
-				<?php next_posts_link( '&larr; Older posts' ) ); ?>
+				<?php next_posts_link( '&larr; Older posts' ); ?>
 				<?php previous_posts_link( 'Newer posts &rarr;' ); ?>
 <?php endif; ?>
