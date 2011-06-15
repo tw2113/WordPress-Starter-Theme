@@ -226,5 +226,5 @@ wp_deregister_style('admin-bar');
 remove_action('wp_footer','wp_admin_bar_render',1000);
 
 // Includes the widgets.php file that defines all widget based functions. Done to clean up this file Uncomment to use.
-//require_once( TEMPLATEPATH . '/widgets.php' );
+require_once( TEMPLATEPATH . '/widgets.php' );
 ?>
