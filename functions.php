@@ -9,12 +9,12 @@ if ( ! function_exists( 'twentyten_setup' ) ):
 function twentyten_setup() {
     
     // Post Format support. You can also use the legacy "gallery" or "asides" (note the plural) categories. More info at http://codex.wordpress.org/Post_Formats
-	add_theme_support( 'post-formats', array( 'aside', 'audio', 'quote', 'link', 'image', 'video' ) );
+	add_theme_support( 'post-formats', array( 'aside', 'audio', 'gallery', 'quote', 'link', 'image', 'status', 'chat', 'video' ) );
 	add_theme_support( 'post-thumbnails' ); // This theme uses Featured Images
-	add_theme_support( 'automatic-feed-links' ); // Add default posts and comments RSS feed links to head
+	add_theme_support( 'automatic-feed-links' ); // Add default posts and comments RSS feed links to <head>
 
 	// This theme uses wp_nav_menu() in one location. Add more as needed
-	register_nav_menus( array( 'primary' => __( 'Primary Navigation', 'twentyten' ), ) );
+	register_nav_menus( array( 'primary' => 'Primary Navigation' ) );
 }
 endif;
 
@@ -41,7 +41,12 @@ function twentyten_custom_excerpt_more( $output ) {
 	return $output;
 }
 add_filter( 'get_the_excerpt', 'twentyten_custom_excerpt_more' );
-
+/* Get wp_nav_menu() fallback, wp_page_menu(), to show home link. */
+function wpst_page_menu_args( $args ) {
+	$args['show_home'] = true;
+	return $args;
+}
+add_filter( 'wp_page_menu_args', 'wpst_page_menu_args' );
 /** Remove inline styles printed when the gallery shortcode is used. */
 function twentyten_remove_gallery_css( $css ) {
 	return preg_replace( "#<style type='text/css'>(.*?)</style>#s", '', $css );
@@ -53,61 +58,71 @@ if ( ! function_exists( 'twentyten_comment' ) ) :
 function twentyten_comment( $comment, $args, $depth ) {
 	$GLOBALS['comment'] = $comment;
 	switch ( $comment->comment_type ) :
-		case '' :
-	?>
-	<li <?php comment_class(); ?> id="li-comment-<?php comment_ID(); ?>">
-		<div id="comment-<?php comment_ID(); ?>">
-		<div class="comment-author vcard">
-			<?php echo get_avatar( $comment, 40 ); ?>
-			<?php printf( '%s <span class="says">says:</span>', sprintf( '<cite class="fn">%s</cite>', get_comment_author_link() ) ); ?>
-		</div><!-- .comment-author .vcard -->
-		<?php if ( $comment->comment_approved == '0' ) : ?>
-			<em><?php echo 'Your comment is awaiting moderation.'; ?></em>
-			<br />
-		<?php endif; ?>
-
-		<div class="comment-meta commentmetadata"><a href="<?php echo esc_url( get_comment_link( $comment->comment_ID ) ); ?>">
-			<?php
-				/* translators: 1: date, 2: time */
-				printf( '%1$s at %2$s', get_comment_date(),  get_comment_time() ); ?></a><?php edit_comment_link( '(Edit)', ' ' );
-			?>
-		</div><!-- .comment-meta .commentmetadata -->
-
-		<div class="comment-body"><?php comment_text(); ?></div>
-
-		<div class="reply">
-			<?php comment_reply_link( array_merge( $args, array( 'depth' => $depth, 'max_depth' => $args['max_depth'] ) ) ); ?>
-		</div><!-- .reply -->
-	</div><!-- #comment-##  -->
-
-	<?php
-		break;
-		case 'pingback'  :
+		case 'pingback' :
 		case 'trackback' :
 	?>
 	<li class="post pingback">
-		<p>Pingback: <?php comment_author_link(); ?><?php edit_comment_link( '(Edit)', ' ' ); ?></p>
+		<p><?php _e( 'Pingback:', 'twentyeleven' ); ?> <?php comment_author_link(); ?><?php edit_comment_link( __( '(Edit)', 'twentyeleven' ), ' ' ); ?></p>
 	<?php
-		break;
+			break;
+		default :
+	?>
+	<li <?php comment_class(); ?> id="li-comment-<?php comment_ID(); ?>">
+		<article id="comment-<?php comment_ID(); ?>" class="comment">
+			<footer class="comment-meta">
+				<div class="comment-author vcard">
+					<?php
+						$avatar_size = 68;
+						if ( '0' != $comment->comment_parent )
+							$avatar_size = 39;
+
+						echo get_avatar( $comment, $avatar_size );
+
+						/* translators: 1: comment author, 2: date and time */
+						printf( __( '%1$s on %2$s <span class="says">said:</span>', 'twentyeleven' ),
+							sprintf( '<span class="fn">%s</span>', get_comment_author_link() ),
+							sprintf( '<a href="%1$s"><time pubdate datetime="%2$s">%3$s</time></a>',
+								esc_url( get_comment_link( $comment->comment_ID ) ),
+								get_comment_time( 'c' ),
+								/* translators: 1: date, 2: time */
+								sprintf( __( '%1$s at %2$s', 'twentyeleven' ), get_comment_date(), get_comment_time() )
+							)
+						);
+					?>
+
+					<?php edit_comment_link( __( '[Edit]', 'twentyeleven' ), ' ' ); ?>
+				</div><!-- .comment-author .vcard -->
+
+				<?php if ( $comment->comment_approved == '0' ) : ?>
+					<em class="comment-awaiting-moderation"><?php _e( 'Your comment is awaiting moderation.', 'twentyeleven' ); ?></em>
+					<br />
+				<?php endif; ?>
+
+			</footer>
+
+			<div class="comment-content"><?php comment_text(); ?></div>
+
+			<div class="reply">
+				<?php comment_reply_link( array_merge( $args, array( 'reply_text' => __( 'Reply &darr;', 'twentyeleven' ), 'depth' => $depth, 'max_depth' => $args['max_depth'] ) ) ); ?>
+			</div><!-- .reply -->
+		</article><!-- #comment-## -->
+
+	<?php
+			break;
 	endswitch;
 }
 endif;
 
 /** Prints HTML with meta information for the current post—date/time and author. */
 function twentyten_posted_on() {
-	printf( '<span class="%1$s">Posted on</span> %2$s <span class="meta-sep">by</span> %3$s',
-	'meta-prep meta-prep-author', //%1$s
-		sprintf( '<a href="%1$s" title="%2$s" rel="bookmark"><span class="entry-date"><time datetime="%3$s">%4$s</time></span></a>',
-			get_permalink(), //inner %1$s
-			esc_attr( get_the_time() ),//inner %2$s
-			get_the_time('c'),//inner %3$s
-			get_the_date()//inner %4$s
-		),
-		sprintf( '<span class="author vcard"><a class="url fn n" href="%1$s" title="%2$s">%3$s</a></span>',
-			get_author_posts_url( get_the_author_meta( 'ID' ) ),
-			sprintf( 'View all posts by %s', get_the_author() ),
-			get_the_author()
-		) //%3$s
+	printf( __( '<span class="sep">Posted on </span><a href="%1$s" title="%2$s" rel="bookmark"><time class="entry-date" datetime="%3$s" pubdate>%4$s</time></a><span class="by-author"> <span class="sep"> by </span> <span class="author vcard"><a class="url fn n" href="%5$s" title="%6$s" rel="author">%7$s</a></span></span>', 'twentyeleven' ),
+		esc_url( get_permalink() ),
+		esc_attr( get_the_time() ),
+		esc_attr( get_the_date( 'c' ) ),
+		esc_html( get_the_date() ),
+		esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ),
+		sprintf( esc_attr__( 'View all posts by %s', 'twentyeleven' ), get_the_author() ),
+		esc_html( get_the_author() )
 	);
 }
 
@@ -185,6 +200,9 @@ function wpst_browser_body_class($classes) {
     else               $classes[] = 'unknown';
 
     if($is_iphone) $classes[] = 'iphone';
+    
+    //Adds a class of singular too when appropriate
+    if ( is_singular() && ! is_home() ) $classes[] = 'singular';
     
     return $classes;
 }
