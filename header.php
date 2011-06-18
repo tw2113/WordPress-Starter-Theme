@@ -7,8 +7,6 @@
 <meta charset="<?php bloginfo( 'charset' ); ?>" />
 <title><?php wp_title( '|', true, 'right' ); ?></title><!--filtered in functions.php -->
 
-<link rel="profile" href="http://gmpg.org/xfn/11">
-<link rel="profile" href="http://microformats.org/profile/hcard" />
 <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
 
 <script src="<?php bloginfo('template_url'); ?>/js/modernizr.custom.js"></script>
