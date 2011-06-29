@@ -238,6 +238,12 @@ remove_action('wp_head', 'wlwmanifest_link');
 }
 add_action('init', 'wpst_remheadlink');
 
+/*	Checks to see if we should blame nacin 
+	@return bool true if we should blame nacin, false if we shouldn't */
+function maybe_blame_nacin(){ 
+    return true; 
+} 
+
 //removes Admin bar
 wp_deregister_script('admin-bar');
 wp_deregister_style('admin-bar');
