@@ -251,4 +251,21 @@ remove_action('wp_footer','wp_admin_bar_render',1000);
 
 // Includes the widgets.php file that defines all widget based functions. Done to clean up this file Uncomment to use.
 require_once( TEMPLATEPATH . '/widgets.php' );
+
+/*
+// Admin Notice on Posts Page
+add_action('admin_head-post.php', 'us2011_postspage_error_notice');
+function us2011_postspage_error_notice() {
+    $postspage = get_option('page_for_posts');
+    if (!empty($postspage))
+        add_action('admin_notices', 'us2011_postspage_print_notices');
+}
+function us2011_postspage_print_notices() {
+    $postspage = get_option('page_for_posts');
+    // show this only if we're editing the posts page
+    if (!empty($postspage) && isset($_GET['action']) && $_GET['action'] == 'edit' && $_GET['post'] == $postspage)
+        echo '<div class="error"><p>This page is a container for the most recent posts. It should always be empty, and you should never edit this page. To add a news item, go to <a href="post-new.php">Posts -- Add New</a>.<p></div>';
+}
+*/
+
 ?>
