@@ -51,6 +51,6 @@ if ( is_singular() && get_option( 'thread_comments' ) ) {
 	<p><?php bloginfo( 'description' ); ?></p>
 
 	<nav id="access" role="navigation">
-		<?php wp_nav_menu( array( 'theme_location' => 'primary' ) ); ?>
+		<?php wp_nav_menu( array( 'theme_location' => 'primary', 'container' => 'nav' ) ); ?>
 	</nav>
 	</header>
