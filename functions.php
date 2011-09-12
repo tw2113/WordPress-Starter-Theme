@@ -215,6 +215,9 @@ wp_deregister_script('admin-bar');
 wp_deregister_style('admin-bar');
 remove_action('wp_footer','wp_admin_bar_render',1000);
 
+//Apply do_shortcode() to widgets so that shortcodes will be executed in widgets
+add_filter('widget_text', 'do_shortcode');
+
 // Includes the widgets.php file that defines all widget based functions. Done to clean up this file Uncomment to use.
 require_once( TEMPLATEPATH . '/widgets.php' );
 
