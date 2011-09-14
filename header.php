@@ -40,6 +40,11 @@ if ( is_singular() && get_option( 'thread_comments' ) ) {
 	}
 	wp_head();
 ?>
+<!--
+// html5 Prefetch. Set the url to what page you want to automatically prefetch.
+Moz/Chrome 13+ (with alt syntax): Supported
+O/Saf/IE/: Not supported
+<link rel="prefetch" href="http://www.example.com/">-->
 </head>
 
 <body <?php body_class(); ?>>
