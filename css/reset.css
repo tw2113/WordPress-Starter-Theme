@@ -19,7 +19,7 @@ em {font-style:italic;}
 a img {border:none;} /* Gets rid of IE's blue borders */
 html {overflow-y:scroll;-webkit-text-size-adjust:100%;-webkit-font-smoothing:antialiased;}
 pre {white-space:pre;white-space:pre-wrap;word-wrap:break-word;padding:15px;}/* www.pathf.com/blogs/2008/05/formatting-quoted-code-in-blog-posts-css21-white-space-pre-wrap/ */
-textarea {overflow:auto;vertical-align:text-top;}/* 1) Remove default scrollbar in IE:www.sitepoint.com/blogs/2010/08/20/ie-remove-textarea-scrollbars/ 2) Align to text-top */
+textarea {overflow:auto;vertical-align:text-top;resize:none;}/* 1) Remove default scrollbar in IE:www.sitepoint.com/blogs/2010/08/20/ie-remove-textarea-scrollbars/ 2) Align to text-top */
 input:valid, textarea:valid { }/* colors for form validity */
 input:invalid, textarea:invalid {border-radius:1px;-moz-box-shadow:0px 0px 5px red;-webkit-box-shadow:0px 0px 5px red;box-shadow:0px 0px 5px red;}
 .no-boxshadow input:invalid, .no-boxshadow textarea:invalid {background-color:#f0dddd;}
