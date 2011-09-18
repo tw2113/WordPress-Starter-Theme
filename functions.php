@@ -219,7 +219,12 @@ remove_action('wp_footer','wp_admin_bar_render',1000);
 add_filter('widget_text', 'do_shortcode');
 
 // Includes the widgets.php file that defines all widget based functions. Done to clean up this file Uncomment to use.
-require_once( TEMPLATEPATH . '/widgets.php' );
+require_once( get_template_directory() . '/widgets.php' );
+require_once( get_template_directory() . '/theme-options.php' );
+/* Example usage:
+$options = get_option('wpst_theme_options');
+echo $option['twitter'];
+*/
 
 /*
 // Admin Notice on Posts Page
@@ -236,5 +241,4 @@ function us2011_postspage_print_notices() {
         echo '<div class="error"><p>This page is a container for the most recent posts. It should always be empty, and you should never edit this page. To add a news item, go to <a href="post-new.php">Posts -- Add New</a>.<p></div>';
 }
 */
-
 ?>
