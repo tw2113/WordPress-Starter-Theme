@@ -47,10 +47,3 @@ br.clear { clear:both; display:block; height:1px; margin:-1px 0 0 0 } /* Use thi
 /* For IE 6/7 (trigger hasLayout) */
 .lte7 .cf { zoom:1; }
 
-
-
-
-
-
-
-
