@@ -21,7 +21,7 @@
 		<article id="post-<?php the_ID(); ?>" <?php post_class(); ?> role="article">
 		    <header>
 			<h2><a href="<?php the_permalink(); ?>" title="<?php printf( esc_attr__( 'Permalink to %s', 'twentyten' ), the_title_attribute( 'echo=0' ) ); ?>" rel="bookmark"><?php the_title(); ?></a></h2>
-			<time="<?php echo get_the_date('Y-m-d'); ?>" pubdate><?php the_date(); ?></time>
+			<div class="datemeta"><?php the_date(); ?></div>
 			<?php twentyten_posted_on(); ?>
 			</header>
 
