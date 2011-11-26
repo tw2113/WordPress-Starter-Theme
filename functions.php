@@ -208,12 +208,7 @@ add_action('init', 'wpst_remheadlink');
 	@return bool true if we should blame nacin, false if we shouldn't */
 function maybe_blame_nacin(){ 
     return true; 
-} 
-
-//removes Admin bar
-wp_deregister_script('admin-bar');
-wp_deregister_style('admin-bar');
-remove_action('wp_footer','wp_admin_bar_render',1000);
+}
 
 //Apply do_shortcode() to widgets so that shortcodes will be executed in widgets
 add_filter('widget_text', 'do_shortcode');
