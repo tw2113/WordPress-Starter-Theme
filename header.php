@@ -35,7 +35,7 @@ if ( is_singular() && get_option( 'thread_comments' ) ) {
 	}
 	if(!is_admin()) {
 	wp_deregister_script('jquery');
-	wp_register_script('jquery', ("https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"), true, '1.6.1');
+	wp_register_script('jquery', ("https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"), true, '1.7.1');
 	wp_enqueue_script('jquery');
 	}
 	wp_head();
