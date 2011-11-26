@@ -181,28 +181,20 @@ function wpst_remove_footer_admin () {
 
 /*** Default Settings Cleanup and Adding Goodies **************************/
 
-/*
-// Remove feed urls
-remove_action( 'wp_head', 'feed_links_extra', 3 );
-remove_action( 'wp_head', 'feed_links', 2 );
-*/
-
-//removes version number
-remove_action('wp_head', 'wp_generator');
-
 /* adds the favicon/appleicon to the wp_head() call*/
-function wpst_blog_favicon() { echo '<link rel="shortcut icon" href="'.get_bloginfo('url').'/favicon.ico" />'; }
-add_action('wp_head', 'wpst_blog_favicon');
-
-function wpst_apple_icon() { echo '<link rel="apple-touch-icon" href="'.get_bloginfo('url').'/apple-touch-icon.png" />'; }
-add_action('wp_head', 'wpst_apple_icon');
+function wpst_favicons() {
+	echo '<link rel="shortcut icon" href="'.get_bloginfo('url').'/favicon.ico" />';
+	echo '<link rel="apple-touch-icon" href="'.get_bloginfo('url').'/apple-touch-icon.png" />';
+	}
+add_action('wp_head', 'wpst_favicons');
 
 //Disable EditURI and WLWManifest
-function wpst_remheadlink() {
-remove_action('wp_head', 'rsd_link');
-remove_action('wp_head', 'wlwmanifest_link');
-}
-add_action('init', 'wpst_remheadlink');
+function wpst_headcleanup() {
+	remove_action('wp_head', 'rsd_link');
+	remove_action('wp_head', 'wlwmanifest_link');
+	remove_action('wp_head', 'wp_generator');
+	}
+add_action('init', 'wpst_headcleanup');
 
 /*	Checks to see if we should blame nacin 
 	@return bool true if we should blame nacin, false if we shouldn't */
