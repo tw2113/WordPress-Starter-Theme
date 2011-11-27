@@ -205,6 +205,14 @@ function maybe_blame_nacin(){
 //Apply do_shortcode() to widgets so that shortcodes will be executed in widgets
 add_filter('widget_text', 'do_shortcode');
 
+// REMOVE THE WORDPRESS UPDATE NOTIFICATION FOR ALL USERS EXCEPT SYSADMIN
+global $user_login;
+get_currentuserinfo();
+if (!current_user_can('update_plugins')) { // checks to see if current user can update plugins
+	add_action( 'init', create_function( '$a', "remove_action( 'init', 'wp_version_check' );" ), 2 );
+	add_filter( 'pre_option_update_core', create_function( '$a', "return null;" ) );
+}
+
 // Includes the widgets.php file that defines all widget based functions. Done to clean up this file Uncomment to use.
 require_once( get_template_directory() . '/widgets.php' );
 require_once( get_template_directory() . '/theme-options.php' );
