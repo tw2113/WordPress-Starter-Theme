@@ -212,6 +212,18 @@ if (!current_user_can('update_plugins')) { // checks to see if current user can 
 	add_action( 'init', create_function( '$a', "remove_action( 'init', 'wp_version_check' );" ), 2 );
 	add_filter( 'pre_option_update_core', create_function( '$a', "return null;" ) );
 }
+//Adds Attachment ID to Media Library admin columns
+add_filter('manage_media_columns', 'posts_columns_attachment_id', 1);
+add_action('manage_media_custom_column', 'posts_custom_columns_attachment_id', 1, 2);
+function posts_columns_attachment_id($defaults){
+    $defaults['wps_post_attachments_id'] = __('ID');
+    return $defaults;
+}
+function posts_custom_columns_attachment_id($column_name, $id){
+	if($column_name === 'wps_post_attachments_id'){
+	echo $id;
+    }
+}
 
 // Includes the widgets.php file that defines all widget based functions. Done to clean up this file Uncomment to use.
 require_once( get_template_directory() . '/widgets.php' );
