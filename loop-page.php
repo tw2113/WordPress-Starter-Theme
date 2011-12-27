@@ -3,7 +3,7 @@
 		<header>
 		<?php if ( is_front_page() ) { ?>
 		<h2><?php the_title(); ?></h2>
-		<?php } else { ?>	
+		<?php } else { ?>
 		<h1><?php the_title(); ?></h1>
 		<?php } ?>
 		</header><!--End Header_page-->

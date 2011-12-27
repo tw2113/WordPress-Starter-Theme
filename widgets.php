@@ -42,9 +42,9 @@ function wpst_remove_wp_widgets(){
 
 class class_name extends WP_Widget {
 	function class_name() {
-		parent::WP_Widget(false, $name = 'enter_name');	
+		parent::WP_Widget(false, $name = 'enter_name');
 	}
-	
+
 	function widget($args, $instance) {
 		//Output the widget content
 		extract( $args );
@@ -54,9 +54,9 @@ class class_name extends WP_Widget {
 		$the_pic = $instance['the_pic'];
 
 		//Output to the front website goes here. Use variables defined above
-		
+
 	}
-	
+
 	function update($new_instance, $old_instance) {
 		//Process and save the widget options
 		$instance = $old_instance;
@@ -64,10 +64,10 @@ class class_name extends WP_Widget {
 		$instance['title'] = strip_tags($new_instance['title']);
 		$instance['the_description'] = strip_tags($new_instance['the_description']);
 		$instance['the_pic'] = strip_tags($new_instance['the_pic']);
-		
+
 		return $instance;
 	}
-	
+
 	function form($instance) {
 		//Output the options form in admin
 		$title = $instance['title'];
@@ -75,7 +75,7 @@ class class_name extends WP_Widget {
 		$the_pic = $instance['the_pic'];
 
 		?>
-		
+
 		<!--The form that the user has to enter the data-->
 	    <p>
 	    <label for="<?php echo $this->get_field_id('title'); ?>">Widget Title:</label><br/>

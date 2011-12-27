@@ -4,12 +4,6 @@
 </div><!--End Container-->
 
 <?php wp_footer(); ?>
-<!--[if lt IE 7 ]>
-<script src="<?php bloginfo('template_url'); ?>/js/DD_belatedPNG_0.0.8a.js"></script>
-	<script>
-		DD_belatedPNG.fix('ENTER SELECTORS HERE');
-	</script>
-<![endif]-->
 
 <!-- asynchronous google analytics: mathiasbynens.be/notes/async-analytics-snippet change the UA-XXXXX-X to be your site's ID -->
   <script>

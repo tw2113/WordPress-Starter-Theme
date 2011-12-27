@@ -43,8 +43,8 @@
 		<?php endif; ?>
 			<footer>
 			<?php if ( function_exists( 'get_post_format' ) && 'gallery' == get_post_format( $post->ID ) ) : ?>
-    		<a href="<?php echo get_post_format_link( 'gallery' ); ?>" title="<?php esc_attr_e( 'View posts in the Gallery category', 'twentyten' ); ?>">More Galleries</a> | 
-		
+    		<a href="<?php echo get_post_format_link( 'gallery' ); ?>" title="<?php esc_attr_e( 'View posts in the Gallery category', 'twentyten' ); ?>">More Galleries</a> |
+
 		    <?php elseif ( in_category( _x( 'gallery', 'gallery category slug', 'twentyten' ) ) ) : ?>
 		    <a href="<?php echo get_term_link( _x( 'gallery', 'gallery category slug', 'twentyten' ), 'category' ); ?>" title="<?php esc_attr_e( 'View posts in the Gallery category', 'twentyten' ); ?>">More Galleries</a> |
 			<?php endif; ?>
@@ -55,7 +55,7 @@
 <?php /* How to display posts of the Aside format. The asides category is the old way. */ ?>
     <?php elseif ( ( function_exists( 'get_post_format' ) && 'aside' == get_post_format( $post->ID ) ) || in_category( _x( 'asides', 'asides category slug', 'twentyten' ) )  ) : ?>
         <article id="post-<?php the_ID(); ?>" <?php post_class(); ?> role="article">
-    
+
 	    <?php if ( is_archive() || is_search() ) : // Display excerpts for archives and search. ?>
 			<?php the_excerpt(); ?>
 		<?php else : ?>
@@ -96,7 +96,7 @@
 				<?php endif; ?>
 				<?php comments_popup_link( 'Leave a comment', '1 Comment', '% Comments' ); ?>
 				<?php edit_post_link( 'Edit', '| ', '' ); ?>
-				
+
 				<?php comments_template( '', true ); ?>
 				</footer>
 		</article>

@@ -7,7 +7,6 @@ add_action( 'after_setup_theme', 'twentyten_setup' );
 if ( ! function_exists( 'twentyten_setup' ) ):
 
 function twentyten_setup() {
-    
     // Post Format support. You can also use the legacy "gallery" or "asides" (note the plural) categories. More info at http://codex.wordpress.org/Post_Formats
 	add_theme_support( 'post-formats', array( 'aside', 'audio', 'gallery', 'quote', 'link', 'image', 'status', 'chat', 'video' ) );
 	add_theme_support( 'post-thumbnails' ); // This theme uses Featured Images
@@ -166,17 +165,16 @@ function wpst_browser_body_class($classes) {
     else               $classes[] = 'unknown';
 
     if($is_iphone) $classes[] = 'iphone';
-    
+
     //Adds a class of singular too when appropriate
     if ( is_singular() && ! is_home() ) $classes[] = 'singular';
-    
+
     return $classes;
 }
 // Customize footer text
 function wpst_remove_footer_admin () {
     //echo "Your own text";
-} 
- 
+}
 //add_filter('admin_footer_text', 'wpst_remove_footer_admin');
 
 /*** Default Settings Cleanup and Adding Goodies **************************/
@@ -188,7 +186,7 @@ function wpst_favicons() {
 	}
 add_action('wp_head', 'wpst_favicons');
 
-//Disable EditURI and WLWManifest
+//Disable EditURI and WLWManifestasdfasf
 function wpst_headcleanup() {
 	remove_action('wp_head', 'rsd_link');
 	remove_action('wp_head', 'wlwmanifest_link');
@@ -196,10 +194,10 @@ function wpst_headcleanup() {
 	}
 add_action('init', 'wpst_headcleanup');
 
-/*	Checks to see if we should blame nacin 
+/*	Checks to see if we should blame nacin
 	@return bool true if we should blame nacin, false if we shouldn't */
-function maybe_blame_nacin(){ 
-    return true; 
+function maybe_blame_nacin(){
+    return true;
 }
 
 //Apply do_shortcode() to widgets so that shortcodes will be executed in widgets

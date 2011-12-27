@@ -1,7 +1,7 @@
 <?php
 /*
 This file contains the functions and code needed to customize the Wordpress Administration area. It is broken down by which
-parts it edits, and frequently lists every available setting for its section.. This is not a file intended to be implemented 
+parts it edits, and frequently lists every available setting for its section.. This is not a file intended to be implemented
 in full. Remove parts that you want to be untouched. At the bottom is a condition statement that can be used to add if user
 is an editor. See comments in each section for additional notes.
 
@@ -153,7 +153,7 @@ function customize_meta_boxes() {
   remove_meta_box('postcustom','page','normal');
   remove_meta_box('trackbacksdiv','page','normal');
   remove_meta_box('commentstatusdiv','page','normal');
-  remove_meta_box('commentsdiv','page','normal'); 
+  remove_meta_box('commentsdiv','page','normal');
 }
 //add_action('admin_init','customize_meta_boxes');
 

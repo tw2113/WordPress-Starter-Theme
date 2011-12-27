@@ -17,19 +17,19 @@
 	if ( $site_description && ( is_home() || is_front_page() ) )
 		echo " | $site_description";
 	// Add a page number if necessary:
-	if ( $paged >= 2 || $page >= 2 ) 
+	if ( $paged >= 2 || $page >= 2 )
 		echo ' | ' . sprintf( 'Page %s', max( $paged, $page ) ); ?>
 </title>
 
 <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
 <link rel="stylesheet" type="text/css" media="all" href="<?php bloginfo( 'stylesheet_url' ); ?>" />
 
-<script src="<?php bloginfo('template_url'); ?>/js/modernizr.custom.js"></script>
+<script src="<?php get_template_directory_uri(); ?>/js/modernizr.custom.js"></script>
 <!--[if (gte IE 6)&(lte IE 8)]>
-	<script type="text/javascript" src="<?php bloginfo( 'template_url'); ?>/js/selectivizr.js"></script>
+	<script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/selectivizr.js"></script>
 	<![endif]--><!--Select-ivizr JS library for CSS3 selectors, DD-PNG fix for IE6-8-->
 
-<?php 
+<?php
 if ( is_singular() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
 	}

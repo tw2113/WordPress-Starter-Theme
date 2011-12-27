@@ -1,5 +1,7 @@
 Just a good solid bare starter theme for WordPress that I keep tinkering with
 
+12-27-11 ** Function Change **
+	-Changed all instances of bloginfo() referencing the theme directory, to use get_template_directory_uri()
 06-18-11 ** WordPress TwentyEleven Poke **
 	-Compared and contrasted this theme with TwentyEleven. Borrowed things I liked from TwentyEleven.
 06-06-11 ** Added Files **
