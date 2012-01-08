@@ -24,7 +24,7 @@
 		    <?php printf( 'By %2$s', 'meta-prep meta-prep-author',
 		            sprintf( '<span class="author vcard"><a class="url fn n" href="%1$s" title="%2$s">%3$s</a></span>',
 		                get_author_posts_url( get_the_author_meta( 'ID' ) ),
-		                	sprintf( esc_attr__( 'View all posts by %s', 'twentyten' ), get_the_author() ),
+		                	sprintf( esc_attr__( 'View all posts by %s' ), get_the_author() ),
 		                	    get_the_author()
 		            )
 		          );
@@ -84,7 +84,7 @@
         <?php if ( !empty( $post->post_excerpt ) ) the_excerpt(); ?>
         <?php the_content( 'Continue reading &rarr;' ); ?>
         <?php wp_link_pages( array( 'before' => '' . __( 'Pages:', 'twentyten' ), 'after' => '' ) ); ?>
-        <?php twentyten_posted_in(); ?>
+        <?php wpst_posted_in(); ?>
 		<?php edit_post_link( 'Edit', ' ', '' ); ?>
 		<?php comments_template(); ?>
     </div>

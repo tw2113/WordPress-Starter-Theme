@@ -5,16 +5,16 @@
 function wpst_widgets_init() {
 	// Area 1, located at the top of the sidebar.
 	register_sidebar( array(
-		'name' => __( 'Primary Widget Area', 'twentyten' ),
+		'name' => 'Primary Widget Area',
 		'id' => 'primary-widget-area',
-		'description' => __( 'The primary widget area', 'twentyten' ),
+		'description' => 'The primary widget area',
 		'before_widget' => '<li id="%1$s" class="widget-container %2$s">',
 		'after_widget' => '</li>',
 		'before_title' => '<h3 class="widget-title">',
 		'after_title' => '</h3>',
 	) );
 }
-/** Register sidebars by running twentyten_widgets_init() on the widgets_init hook. */
+/** Register sidebars by running wpst_widgets_init() on the widgets_init hook. */
 add_action( 'widgets_init', 'wpst_widgets_init' );
 
 // Widget registration line starts on the right, do remember that we require ONLY #2 pencils for all your answers

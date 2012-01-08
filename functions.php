@@ -1,12 +1,7 @@
 <?php
 /** This entire theme is based on TwentyTen from WordPress 3.1. Edited as I saw fit ****/
 
-/** Tell WordPress to run twentyten_setup() when the 'after_setup_theme' hook is run. */
-add_action( 'after_setup_theme', 'twentyten_setup' );
-
-if ( ! function_exists( 'twentyten_setup' ) ):
-
-function twentyten_setup() {
+function wpst_setup() {
     // Post Format support. You can also use the legacy "gallery" or "asides" (note the plural) categories. More info at http://codex.wordpress.org/Post_Formats
 	add_theme_support( 'post-formats', array( 'aside', 'audio', 'gallery', 'quote', 'link', 'image', 'status', 'chat', 'video' ) );
 	add_theme_support( 'post-thumbnails' ); // This theme uses Featured Images
@@ -15,31 +10,30 @@ function twentyten_setup() {
 	// This theme uses wp_nav_menu() in one location. Add more as needed
 	register_nav_menus( array( 'primary' => 'Primary Navigation' ) );
 }
-endif;
 
 /** Sets the post excerpt length to 40 characters. */
-function twentyten_excerpt_length( $length ) { return 40; }
-add_filter( 'excerpt_length', 'twentyten_excerpt_length' );
+function wpst_excerpt_length( $length ) { return 40; }
+add_filter( 'excerpt_length', 'wpst_excerpt_length' );
 
 /** Returns a "Continue Reading" link for excerpts. */
-function twentyten_continue_reading_link() {
+function wpst_continue_reading_link() {
 	return '<a href="'. get_permalink() . '"> Continue reading <span class="meta-nav">&rarr;</span></a>';
 }
 
-/** Replaces "[...]" (appended to automatically generated excerpts) with an ellipsis and twentyten_continue_reading_link(). */
-function twentyten_auto_excerpt_more( $more ) {
-	return ' &hellip;' . twentyten_continue_reading_link();
+/** Replaces "[...]" (appended to automatically generated excerpts) with an ellipsis and wpst_continue_reading_link(). */
+function wpst_auto_excerpt_more( $more ) {
+	return ' &hellip;' . wpst_continue_reading_link();
 }
-add_filter( 'excerpt_more', 'twentyten_auto_excerpt_more' );
+add_filter( 'excerpt_more', 'wpst_auto_excerpt_more' );
 
 /** Adds a pretty "Continue Reading" link to custom post excerpts. */
-function twentyten_custom_excerpt_more( $output ) {
+function wpst_custom_excerpt_more( $output ) {
 	if ( has_excerpt() && ! is_attachment() ) {
-		$output .= twentyten_continue_reading_link();
+		$output .= wpst_continue_reading_link();
 	}
 	return $output;
 }
-add_filter( 'get_the_excerpt', 'twentyten_custom_excerpt_more' );
+add_filter( 'get_the_excerpt', 'wpst_custom_excerpt_more' );
 /* Get wp_nav_menu() fallback, wp_page_menu(), to show home link. */
 function wpst_page_menu_args( $args ) {
 	$args['show_home'] = true;
@@ -47,14 +41,13 @@ function wpst_page_menu_args( $args ) {
 }
 add_filter( 'wp_page_menu_args', 'wpst_page_menu_args' );
 /** Remove inline styles printed when the gallery shortcode is used. */
-function twentyten_remove_gallery_css( $css ) {
+function wpst_remove_gallery_css( $css ) {
 	return preg_replace( "#<style type='text/css'>(.*?)</style>#s", '', $css );
 }
-add_filter( 'gallery_style', 'twentyten_remove_gallery_css' );
+add_filter( 'gallery_style', 'wpst_remove_gallery_css' );
 
-if ( ! function_exists( 'twentyten_comment' ) ) :
 /** Template for comments and pingbacks. */
-function twentyten_comment( $comment, $args, $depth ) {
+function wpst_comment( $comment, $args, $depth ) {
 	$GLOBALS['comment'] = $comment;
 	switch ( $comment->comment_type ) :
 		case 'pingback' :
@@ -113,7 +106,7 @@ function twentyten_comment( $comment, $args, $depth ) {
 endif;
 
 /** Prints HTML with meta information for the current post—date/time and author. */
-function twentyten_posted_on() {
+function wpst_posted_on() {
 	printf( __( '<span class="sep">Posted on </span><a href="%1$s" title="%2$s" rel="bookmark"><time class="entry-date" datetime="%3$s" pubdate>%4$s</time></a><span class="by-author"> <span class="sep"> by </span> <span class="author vcard"><a class="url fn n" href="%5$s" title="%6$s" rel="author">%7$s</a></span></span>', 'twentyeleven' ),
 		esc_url( get_permalink() ),
 		esc_attr( get_the_time() ),
@@ -125,9 +118,8 @@ function twentyten_posted_on() {
 	);
 }
 
-if ( ! function_exists( 'twentyten_posted_in' ) ) :
 /** Prints HTML with meta information for the current post (category, tags and permalink). */
-function twentyten_posted_in() {
+function wpst_posted_in() {
 	// Retrieves tag list of current post, separated by commas.
 	$tag_list = get_the_tag_list( '', ', ' );
 	if ( $tag_list ) {

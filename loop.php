@@ -22,7 +22,7 @@
 		    <header>
 			<h2><a href="<?php the_permalink(); ?>" title="<?php printf( esc_attr__( 'Permalink to %s', 'twentyten' ), the_title_attribute( 'echo=0' ) ); ?>" rel="bookmark"><?php the_title(); ?></a></h2>
 			<div class="datemeta"><?php the_date(); ?></div>
-			<?php twentyten_posted_on(); ?>
+			<?php wpst_posted_on(); ?>
 			</header>
 
 		<?php if ( post_password_required() ) : ?>
@@ -63,7 +63,7 @@
 		<?php endif; ?>
 			<footer>
 			    <time="<?php echo get_the_date('Y-m-d'); ?>" pubdate><?php the_date(); ?></time>
-				<?php twentyten_posted_on(); ?>
+				<?php wpst_posted_on(); ?>
 				|
 				<?php comments_popup_link( 'Leave a comment', '1 Comment', '% Comments' ); ?>
 				<?php edit_post_link( 'Edit', '| ', '' ); ?>
@@ -76,7 +76,7 @@
 			<header>
 			<h2><a href="<?php the_permalink(); ?>" title="<?php printf( esc_attr__( 'Permalink to %s', 'twentyten' ), the_title_attribute( 'echo=0' ) ); ?>" rel="bookmark"><?php the_title(); ?></a></h2>
 			<time="<?php echo get_the_date('Y-m-d'); ?>" pubdate><?php the_date(); ?></time>
-			<?php twentyten_posted_on(); ?>
+			<?php wpst_posted_on(); ?>
 			</header>
 	<?php if ( is_archive() || is_search() ) : // Only display excerpts for archives and search. ?>
 			<?php the_excerpt(); ?>
