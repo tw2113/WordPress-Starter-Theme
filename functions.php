@@ -103,7 +103,6 @@ function wpst_comment( $comment, $args, $depth ) {
 			break;
 	endswitch;
 }
-endif;
 
 /** Prints HTML with meta information for the current post—date/time and author. */
 function wpst_posted_on() {
@@ -138,7 +137,6 @@ function wpst_posted_in() {
 		the_title_attribute( 'echo=0' )
 	);
 }
-endif;
 
 // browser detection via body_class
 add_filter('body_class','wpst_browser_body_class');
