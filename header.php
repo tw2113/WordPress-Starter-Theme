@@ -24,7 +24,7 @@
 <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
 <link rel="stylesheet" type="text/css" media="all" href="<?php bloginfo( 'stylesheet_url' ); ?>" />
 
-<script src="<?php get_template_directory_uri(); ?>/js/modernizr.custom.js"></script>
+<script src="<?php echo get_template_directory_uri(); ?>/js/modernizr.custom.js"></script>
 <!--[if (gte IE 6)&(lte IE 8)]>
 	<script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/selectivizr.js"></script>
 	<![endif]--><!--Select-ivizr JS library for CSS3 selectors, DD-PNG fix for IE6-8-->
