@@ -20,7 +20,7 @@ endif;
 	<?php next_comments_link( 'Newer Comments &rarr;' ); ?>
 <?php endif; // check for comment navigation ?>
 	<ol>
-	<?php wp_list_comments( array( 'callback' => 'twentyten_comment' ) ); ?>
+	<?php wp_list_comments( array( 'callback' => 'wpst_comment' ) ); ?>
 	</ol>
 
 <?php if ( get_comment_pages_count() > 1 && get_option( 'page_comments' ) ) : // Are there comments to navigate through? ?>
