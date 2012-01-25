@@ -1,5 +1,6 @@
 <?php get_header(); ?>
 <div class="content" role="main">
+	<?php if(have_posts()) : while(have_posts()) : the_post(); ?>
     <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 		<header>
 		<?php if ( is_front_page() ) { ?>
@@ -13,6 +14,7 @@
 		<?php wp_link_pages( array( 'before' => '' . 'Pages:', 'after' => '' ) ); ?>
 		<?php edit_post_link( 'Edit', '', '' ); ?>
 	</article>
+	<?php endwhile; endif; ?>
 <?php get_sidebar(); ?>
 </div>
 <?php get_footer(); ?>
