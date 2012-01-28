@@ -1,6 +1,6 @@
 <?php
 /** This entire theme is based on TwentyTen from WordPress 3.1. Edited as I saw fit ****/
-add_action('init', 'wpst_setup');
+add_action('after_setup_theme', 'wpst_setup');
 function wpst_setup() {
     // Post Format support. You can also use the legacy "gallery" or "asides" (note the plural) categories. More info at http://codex.wordpress.org/Post_Formats
 	add_theme_support( 'post-formats', array( 'aside', 'audio', 'gallery', 'quote', 'link', 'image', 'status', 'chat', 'video' ) );
