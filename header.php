@@ -23,6 +23,7 @@
 
 <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
 <link rel="stylesheet" type="text/css" media="all" href="<?php bloginfo( 'stylesheet_url' ); ?>" />
+<script src="<?php echo get_template_directory_uri(); ?>/js/prefixfree.min.js"></script>
 
 <script src="<?php echo get_template_directory_uri(); ?>/js/modernizr.custom.js"></script>
 <!--[if (gte IE 6)&(lte IE 8)]>
