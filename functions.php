@@ -213,7 +213,18 @@ function posts_custom_columns_attachment_id($column_name, $id){
 	echo $id;
     }
 }
-
+//Add Plugins link to Admin Bar
+function add_wpst_admin_bar_link($wp_admin_bar) {
+	if ( !is_super_admin() || !is_admin_bar_showing() )
+		return;
+	$wp_admin_bar->add_node( array(
+	'parent' => 'site-name',
+	'id' => 'ab-plugins',
+	'title' => 'Plugins',
+	'href' => admin_url('plugins.php')
+	) );
+}
+add_action('admin_bar_menu', 'add_wpst_admin_bar_link', 35);
 // Includes the widgets.php file that defines all widget based functions. Done to clean up this file Uncomment to use.
 require_once( get_template_directory() . '/widgets.php' );
 require_once( get_template_directory() . '/theme-options.php' );
