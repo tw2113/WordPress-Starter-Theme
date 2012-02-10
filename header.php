@@ -57,6 +57,6 @@ O/Saf/IE/: Not supported
 	<p><?php bloginfo( 'description' ); ?></p>
 
 	<nav id="access" role="navigation">
-		<?php wp_nav_menu( array( 'theme_location' => 'primary', 'container' => 'nav' ) ); ?>
+		<?php wp_nav_menu( array( 'theme_location' => 'primary', 'container' => '' ) ); ?>
 	</nav>
 	</header>
