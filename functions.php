@@ -225,6 +225,12 @@ function add_wpst_admin_bar_link($wp_admin_bar) {
 	) );
 }
 add_action('admin_bar_menu', 'add_wpst_admin_bar_link', 35);
+
+//Remove <p> tags from images
+function filter_ptags_on_images($content){
+    return preg_replace('/<p>\s*(<a .*>)?\s*(<img .* \/>)\s*(<\/a>)?\s*<\/p>/iU', '\1\2\3', $content);
+}
+add_filter('the_content', 'filter_ptags_on_images');
 // Includes the widgets.php file that defines all widget based functions. Done to clean up this file Uncomment to use.
 require_once( get_template_directory() . '/widgets.php' );
 require_once( get_template_directory() . '/theme-options.php' );
