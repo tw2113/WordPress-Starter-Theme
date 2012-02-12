@@ -11,21 +11,28 @@ function wpst_setup() {
 	register_nav_menus( array( 'primary' => 'Primary Navigation' ) );
 }
 
+/*Register and enqueue javascript/styles*/
+add_action('wp_print_scripts', 'wpst_load_scripts');
+function wpst_load_scripts() {
+	if(is_admin()) return;
+	wp_deregister_script('jquery');
+	wp_register_script('jquery', ("https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"), true, '1.7.1');
+	wp_enqueue_script('jquery');
+}
+
+/** Post comments/excerpts alterations. *****************************/
 /** Sets the post excerpt length to 40 characters. */
 function wpst_excerpt_length( $length ) { return 40; }
 add_filter( 'excerpt_length', 'wpst_excerpt_length' );
 
 /** Returns a "Continue Reading" link for excerpts. */
 function wpst_continue_reading_link() {
-	return '<a href="'. get_permalink() . '"> Continue reading <span class="meta-nav">&rarr;</span></a>';
-}
-
+	return '<a href="'. get_permalink() . '"> Continue reading <span class="meta-nav">&rarr;</span></a>'; }
 /** Replaces "[...]" (appended to automatically generated excerpts) with an ellipsis and wpst_continue_reading_link(). */
 function wpst_auto_excerpt_more( $more ) {
 	return ' &hellip;' . wpst_continue_reading_link();
 }
 add_filter( 'excerpt_more', 'wpst_auto_excerpt_more' );
-
 /** Adds a pretty "Continue Reading" link to custom post excerpts. */
 function wpst_custom_excerpt_more( $output ) {
 	if ( has_excerpt() && ! is_attachment() ) {
@@ -34,31 +41,18 @@ function wpst_custom_excerpt_more( $output ) {
 	return $output;
 }
 add_filter( 'get_the_excerpt', 'wpst_custom_excerpt_more' );
-/* Get wp_nav_menu() fallback, wp_page_menu(), to show home link. */
-function wpst_page_menu_args( $args ) {
-	$args['show_home'] = true;
-	return $args;
-}
-add_filter( 'wp_page_menu_args', 'wpst_page_menu_args' );
-/** Remove inline styles printed when the gallery shortcode is used. */
-function wpst_remove_gallery_css( $css ) {
-	return preg_replace( "#<style type='text/css'>(.*?)</style>#s", '', $css );
-}
-add_filter( 'gallery_style', 'wpst_remove_gallery_css' );
 
 /** Template for comments and pingbacks. */
 function wpst_comment( $comment, $args, $depth ) {
 	$GLOBALS['comment'] = $comment;
 	switch ( $comment->comment_type ) :
 		case 'pingback' :
-		case 'trackback' :
-	?>
+		case 'trackback' : ?>
 	<li class="post pingback">
 		<p><?php _e( 'Pingback:', 'twentyeleven' ); ?> <?php comment_author_link(); ?><?php edit_comment_link( __( '(Edit)', 'twentyeleven' ), ' ' ); ?></p>
 	<?php
 			break;
-		default :
-	?>
+		default : ?>
 	<li <?php comment_class(); ?> id="li-comment-<?php comment_ID(); ?>">
 		<article id="comment-<?php comment_ID(); ?>" class="comment">
 			<footer class="comment-meta">
@@ -103,6 +97,19 @@ function wpst_comment( $comment, $args, $depth ) {
 			break;
 	endswitch;
 }
+/** END Post comments/excerpts alterations. *****************************/
+
+/* Get wp_nav_menu() fallback, wp_page_menu(), to show home link. */
+function wpst_page_menu_args( $args ) {
+	$args['show_home'] = true;
+	return $args;
+}
+add_filter( 'wp_page_menu_args', 'wpst_page_menu_args' );
+/** Remove inline styles printed when the gallery shortcode is used. */
+function wpst_remove_gallery_css( $css ) {
+	return preg_replace( "#<style type='text/css'>(.*?)</style>#s", '', $css );
+}
+add_filter( 'gallery_style', 'wpst_remove_gallery_css' );
 
 /** Prints HTML with meta information for the current post—date/time and author. */
 function wpst_posted_on() {
@@ -116,7 +123,6 @@ function wpst_posted_on() {
 		esc_html( get_the_author() )
 	);
 }
-
 /** Prints HTML with meta information for the current post (category, tags and permalink). */
 function wpst_posted_in() {
 	// Retrieves tag list of current post, separated by commas.
@@ -139,8 +145,6 @@ function wpst_posted_in() {
 }
 
 // browser detection via body_class
-add_filter('body_class','wpst_browser_body_class');
-
 function wpst_browser_body_class($classes) {
     //WordPress global vars available.
     global $is_lynx, $is_gecko, $is_IE, $is_opera, $is_NS4, $is_safari, $is_chrome, $is_iphone;
@@ -161,11 +165,12 @@ function wpst_browser_body_class($classes) {
 
     return $classes;
 }
-// Customize footer text
+add_filter('body_class','wpst_browser_body_class');
+
+//add_filter('admin_footer_text', 'wpst_remove_footer_admin'); //Customize footer text
 function wpst_remove_footer_admin () {
     //echo "Your own text";
 }
-//add_filter('admin_footer_text', 'wpst_remove_footer_admin');
 
 /*** Default Settings Cleanup and Adding Goodies **************************/
 
@@ -173,10 +178,10 @@ function wpst_remove_footer_admin () {
 function wpst_favicons() {
 	echo '<link rel="shortcut icon" href="'.get_bloginfo('url').'/favicon.ico" />';
 	echo '<link rel="apple-touch-icon" href="'.get_bloginfo('url').'/apple-touch-icon.png" />';
-	}
+}
 add_action('wp_head', 'wpst_favicons');
 
-//Disable EditURI and WLWManifestasdfasf
+//Disable EditURI, WLWManifest, adjacent posts rel, and version generator
 function wpst_headcleanup() {
 	remove_action('wp_head', 'rsd_link');
 	remove_action('wp_head', 'wlwmanifest_link');
@@ -201,6 +206,7 @@ if (!current_user_can('update_plugins')) { // checks to see if current user can 
 	add_action( 'init', create_function( '$a', "remove_action( 'init', 'wp_version_check' );" ), 2 );
 	add_filter( 'pre_option_update_core', create_function( '$a', "return null;" ) );
 }
+
 //Adds Attachment ID to Media Library admin columns
 add_filter('manage_media_columns', 'posts_columns_attachment_id', 1);
 add_action('manage_media_custom_column', 'posts_custom_columns_attachment_id', 1, 2);
@@ -213,6 +219,7 @@ function posts_custom_columns_attachment_id($column_name, $id){
 	echo $id;
     }
 }
+
 //Add Plugins link to Admin Bar
 function add_wpst_admin_bar_link($wp_admin_bar) {
 	if ( !is_super_admin() || !is_admin_bar_showing() )
@@ -239,9 +246,8 @@ $options = get_option('wpst_theme_options');
 echo $option['twitter'];
 */
 
-/*
 // Admin Notice on Posts Page
-add_action('admin_head-post.php', 'us2011_postspage_error_notice');
+//add_action('admin_head-post.php', 'us2011_postspage_error_notice');
 function us2011_postspage_error_notice() {
     $postspage = get_option('page_for_posts');
     if (!empty($postspage))
@@ -253,5 +259,3 @@ function us2011_postspage_print_notices() {
     if (!empty($postspage) && isset($_GET['action']) && $_GET['action'] == 'edit' && $_GET['post'] == $postspage)
         echo '<div class="error"><p>This page is a container for the most recent posts. It should always be empty, and you should never edit this page. To add a news item, go to <a href="post-new.php">Posts -- Add New</a>.<p></div>';
 }
-*/
-?>
