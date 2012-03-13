@@ -6,10 +6,8 @@ Version: 3.0
 Author: Michael Beckwith
 Author URI: http://michaelbox.net
 */
-
-@import "css/reset.css";
+@import "css/normalize.css";
 @import "css/hardboiledmediaqueries.0.9.css";
-
 /** Put your custom @font-face font declarations in here ****************/
 
 /**/
