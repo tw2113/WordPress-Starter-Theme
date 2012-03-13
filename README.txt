@@ -1,5 +1,7 @@
 Just a good solid bare starter theme for WordPress that I keep tinkering with
 
+03-13-12 ** Normalization **
+	-I clearly always forget to edit this with updates. Anyways. Added normalize.css instead of reset.css.
 12-27-11 ** Function Change **
 	-Changed all instances of bloginfo() referencing the theme directory, to use get_template_directory_uri()
 06-18-11 ** WordPress TwentyEleven Poke **
