@@ -15,8 +15,6 @@ function wpst_setup() {
 add_action('wp_print_scripts', 'wpst_load_scripts');
 function wpst_load_scripts() {
 	if(is_admin()) return;
-	wp_deregister_script('jquery');
-	wp_register_script('jquery', ("https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"), true, '1.7.1');
 	wp_enqueue_script('jquery');
 }
 
