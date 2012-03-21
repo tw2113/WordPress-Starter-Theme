@@ -167,11 +167,6 @@ function wpst_browser_body_class($classes) {
 }
 add_filter('body_class','wpst_browser_body_class');
 
-//add_filter('admin_footer_text', 'wpst_remove_footer_admin'); //Customize footer text
-function wpst_remove_footer_admin () {
-    //echo "Your own text";
-}
-
 /*** Default Settings Cleanup and Adding Goodies **************************/
 
 /* adds the favicon/appleicon to the wp_head() call*/
@@ -238,13 +233,6 @@ function filter_ptags_on_images($content){
     return preg_replace('/<p>\s*(<a .*>)?\s*(<img .* \/>)\s*(<\/a>)?\s*<\/p>/iU', '\1\2\3', $content);
 }
 add_filter('the_content', 'filter_ptags_on_images');
-// Includes the widgets.php file that defines all widget based functions. Done to clean up this file Uncomment to use.
-require_once( get_template_directory() . '/widgets.php' );
-require_once( get_template_directory() . '/theme-options.php' );
-/* Example usage:
-$options = get_option('wpst_theme_options');
-echo $option['twitter'];
-*/
 
 // Admin Notice on Posts Page
 //add_action('admin_head-post.php', 'us2011_postspage_error_notice');
@@ -259,3 +247,12 @@ function us2011_postspage_print_notices() {
     if (!empty($postspage) && isset($_GET['action']) && $_GET['action'] == 'edit' && $_GET['post'] == $postspage)
         echo '<div class="error"><p>This page is a container for the most recent posts. It should always be empty, and you should never edit this page. To add a news item, go to <a href="post-new.php">Posts -- Add New</a>.<p></div>';
 }
+/* Example theme options usage:
+$options = get_option('wpst_theme_options');
+echo $option['twitter'];
+*/
+
+// Includes the widgets.php file that defines all widget based functions.
+require_once( get_template_directory() . '/widgets.php' );
+require_once( get_template_directory() . 'inc/theme-options.php' );
+require_once( get_template_directory() . 'inc/admin_appearance_mods.php' );
