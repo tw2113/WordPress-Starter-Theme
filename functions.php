@@ -252,5 +252,5 @@ echo $option['twitter'];
 
 // Includes the widgets.php file that defines all widget based functions.
 require_once( get_template_directory() . '/widgets.php' );
-require_once( get_template_directory() . 'inc/theme-options.php' );
-require_once( get_template_directory() . 'inc/admin_appearance_mods.php' );
+require_once( get_template_directory() . '/inc/theme-options.php' );
+require_once( get_template_directory() . '/inc/admin_appearance_mods.php' );
