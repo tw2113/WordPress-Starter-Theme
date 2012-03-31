@@ -21,7 +21,7 @@
 		echo ' | ' . sprintf( 'Page %s', max( $paged, $page ) ); ?>
 </title>
 <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
-<link rel="stylesheet" media="all" href="<?php echo get_stylesheet_directory_uri();?>/css/reset.css" />
+<link rel="stylesheet" media="all" href="<?php echo get_stylesheet_directory_uri();?>/css/normalize.css" />
 <link rel="stylesheet" type="text/css" media="all" href="<?php bloginfo( 'stylesheet_url' ); ?>" />
 <script src="<?php echo get_template_directory_uri(); ?>/js/prefixfree.min.js"></script>
 <script src="<?php echo get_template_directory_uri(); ?>/js/modernizr.custom.js"></script>
