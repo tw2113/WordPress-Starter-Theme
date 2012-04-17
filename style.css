@@ -20,7 +20,7 @@ select, input, textarea, button { font:99% sans-serif; }
    Also: hot pink! */
 ::-moz-selection { background: #FEA357; color:#fff; text-shadow: none; }
 ::selection { background:#FEA357; color:#fff; text-shadow: none; }
-body, select, input, textarea {
+body {
 /* #444 looks better than black*/
     color: #444; font-size: 62.5%; /*allows for Em usage. 1em = 10px and so on*/
 }
