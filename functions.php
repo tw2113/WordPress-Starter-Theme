@@ -148,7 +148,7 @@ function wpst_browser_body_class($classes) {
     global $is_lynx, $is_gecko, $is_IE, $is_opera, $is_NS4, $is_safari, $is_chrome, $is_iphone;
 
     if($is_lynx)       $classes[] = 'lynx';
-    elseif($is_gecko)  $classes[] = 'gecko';
+    elseif($is_gecko)  $classes[] = 'firefox';
     elseif($is_opera)  $classes[] = 'opera';
     elseif($is_NS4)    $classes[] = 'ns4';
     elseif($is_safari) $classes[] = 'safari';
