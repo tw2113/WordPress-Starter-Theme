@@ -1,0 +1,8 @@
+<?php
+/*
+	Just a quick reference file for tasks I commonly use but never remember how to do.
+*/
+
+//Get just the image source url of featured image.
+$imgsrc = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), "Full");
+echo $imgsrc[0];
