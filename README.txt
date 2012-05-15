@@ -1,5 +1,7 @@
 Just a good solid bare starter theme for WordPress that I keep tinkering with
 
+05-15-12 ** Too many changes to efficiently list **
+	-Just read the commit logs :)
 03-13-12 ** Normalization **
 	-I clearly always forget to edit this with updates. Anyways. Added normalize.css instead of reset.css.
 12-27-11 ** Function Change **
