@@ -69,6 +69,11 @@ body { font-size: 16px; font-size: 1.6rem; } /* =16px */
 nav #menu-primary {
 
 }
+/*Disable current page/menu link*/
+nav .current-menu-item > a {
+       pointer-events: none;
+       cursor: default;
+}
 nav .sub-menu {
 
 }
