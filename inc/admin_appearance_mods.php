@@ -43,3 +43,47 @@ function my_save_extra_profile_fields( $user_id ) {
 
 /** Usage in template files **************/
 //echo get_the_author_meta('avatar', $user_id);
+
+/*
+Instructions:
+
+Just put this snippet in the functions.php file of you theme. And note that the second and third of $admin_bar->add_menu are add sub menu to the first, and the parent parameter is set to the id of the first $admin_bar->add_menu, which in this case is my-item.
+
+Remove:
+$admin_bar->remove_menu( 'slug' );
+For example you can remove the WordPress logo by using : $admin_bar->remove_menu( 'wp-logo' );
+
+*/
+//add_action('admin_bar_menu', 'add_toolbar_items', 100);
+function add_toolbar_items($admin_bar){
+	$admin_bar->add_menu( array(
+		'id'    => 'my-item',
+		'title' => 'My Item',
+		'href'  => '#',
+		'meta'  => array(
+			'title' => __('My Item'),
+		),
+	));
+	$admin_bar->add_menu( array(
+		'id'    => 'my-sub-item',
+		'parent' => 'my-item',
+		'title' => 'My Sub Menu Item',
+		'href'  => '#',
+		'meta'  => array(
+			'title' => __('My Sub Menu Item'),
+			'target' => '_blank',
+			'class' => 'my_menu_item_class'
+		),
+	));
+	$admin_bar->add_menu( array(
+		'id'    => 'my-second-sub-item',
+		'parent' => 'my-item',
+		'title' => 'My Second Sub Menu Item',
+		'href'  => '#',
+		'meta'  => array(
+			'title' => __('My Second Sub Menu Item'),
+			'target' => '_blank',
+			'class' => 'my_menu_item_class'
+		),
+	));
+}

@@ -165,6 +165,24 @@ function wpst_browser_body_class($classes) {
 }
 add_filter('body_class','wpst_browser_body_class');
 
+// Post numbering via post_class
+function wpst_additional_post_classes( $classes ) {
+	global $wp_query;
+
+	if( $wp_query->found_posts < 1 ) return $classes;
+	if( $wp_query->current_post == 0 ) $classes[] = 'post-first';
+
+	if( $wp_query->current_post % 2 ) {
+		$classes[] = 'post-even';
+	} else {
+		$classes[] = 'post-odd';
+	}
+	if( $wp_query->current_post == ( $wp_query->post_count - 1 ) ) $classes[] = 'post-last';
+
+	return $classes;
+}
+add_filter( 'post_class', 'wpst_additional_post_classes' );
+
 /*** Default Settings Cleanup and Adding Goodies **************************/
 
 /* adds the favicon/appleicon to the wp_head() call*/
@@ -245,12 +263,54 @@ function us2011_postspage_print_notices() {
     if (!empty($postspage) && isset($_GET['action']) && $_GET['action'] == 'edit' && $_GET['post'] == $postspage)
         echo '<div class="error"><p>This page is a container for the most recent posts. It should always be empty, and you should never edit this page. To add a news item, go to <a href="post-new.php">Posts -- Add New</a>.<p></div>';
 }
-/* Example theme options usage:
-$options = get_option('wpst_theme_options');
-echo $option['twitter'];
-*/
+// function for inserting Google Analytics into the wp_footer
+add_action('wp_footer', 'ga');
+function ga() {
+	if ( !is_user_logged_in() ) { // not for logged in users ?>
+
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+	  	_gaq.push(['_setAccount', 'UA-XXXXXXXX']); // insert your Google Analytics id here
+	  	_gaq.push(['_trackPageview']);
+	  	_gaq.push(['_trackPageLoadTime']);
+	  	(function() {
+	    	var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	    	ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	    	var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	  	})();
+	</script>
+
+	<?php
+	}
+}
+
+/* Automatically add first image attached to a post as the featured image if post doesn't have a featured image already */
+//Borrowed from https://github.com/rachelbaker/bootstrapwp-Twitter-Bootstrap-for-WordPress
+function wpst_autoset_featured_img() {
+	global $post;
+	$already_has_thumb = has_post_thumbnail($post->ID);
+	if (!$already_has_thumb) {
+		$attached_image = get_children( "post_parent=$post->ID&post_type=attachment&post_mime_type=image&numberposts=1" );
+		if ($attached_image) {
+			foreach ($attached_image as $attachment_id => $attachment) {
+				set_post_thumbnail($post->ID, $attachment_id);
+			}
+		}
+	}
+}
+add_action('the_post', 'wpst_autoset_featured_img');
+add_action('save_post', 'wpst_autoset_featured_img');
+add_action('draft_to_publish', 'wpst_autoset_featured_img');
+add_action('new_to_publish', 'wpst_autoset_featured_img');
+add_action('pending_to_publish', 'wpst_autoset_featured_img');
+add_action('future_to_publish', 'wpst_autoset_featured_img');
 
 // Includes the widgets.php file that defines all widget based functions.
 require_once( get_template_directory() . '/widgets.php' );
 require_once( get_template_directory() . '/inc/theme-options.php' );
 require_once( get_template_directory() . '/inc/admin_appearance_mods.php' );
+
+/* Example theme options usage:
+$options = get_option('wpst_theme_options');
+echo $option['twitter'];
+*/
