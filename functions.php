@@ -12,7 +12,7 @@ function wpst_setup() {
 }
 
 /*Register and enqueue javascript/styles*/
-add_action('wp_print_scripts', 'wpst_load_scripts');
+add_action('wp_enqueue_scripts', 'wpst_load_scripts');
 function wpst_load_scripts() {
 	if(is_admin()) return;
 	wp_enqueue_script('jquery');
