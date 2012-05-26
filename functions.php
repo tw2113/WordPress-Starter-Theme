@@ -17,6 +17,7 @@ function wpst_load_scripts() {
 	if(is_admin()) return;
 	wp_enqueue_script('jquery');
 	//wp_enqueue_script('cycle', get_stylesheet_directory_uri().'/js/jquery.cycle.all.min.js', array('jquery'));
+	//wp_enqueue_script('mailcheck', get_stylesheet_directory_uri().'/js/jquery.mailcheck.min.js', array('jquery'));
 }
 
 /** Post comments/excerpts alterations. *****************************/
