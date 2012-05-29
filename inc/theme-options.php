@@ -31,10 +31,14 @@ function theme_options_do_page() {
 			<?php $options = get_option( 'wpst_theme_options' ); ?>
 
 			<table class="form-table">
-
 				<tr valign="top"><th scope="row"><label for="wpst_theme_options[twitter]">Twitter ID</label></th>
-					<td>
+					<td><span style="font-style: italic;">http://www.twitter.com/</span>
 					<input id="wpst_theme_options[twitter]" class="regular-text" type="text" maxlength="45" size="25" name="wpst_theme_options[twitter]" value="<?php esc_attr_e( $options['twitter'] ); ?>"/>
+					</td>
+				</tr>
+				<tr valign="top"><th scope="row"><label for="wpst_theme_options[facebook]">Facebook</label></th>
+					<td><span style="font-style: italic;">http://www.facebook.com/</span>
+					<input id="wpst_theme_options[facebook]" class="regular-text" type="text" maxlength="45" size="25" name="wpst_theme_options[facebook]" value="<?php esc_attr_e( $options['facebook'] ); ?>"/>
 					</td>
 				</tr>
 			</table>
@@ -53,6 +57,8 @@ function theme_options_do_page() {
 function theme_options_validate( $input ) {
 	// Say our text option must be safe text with no HTML tags
 	$input['twitter'] = wp_filter_nohtml_kses( $input['twitter'] );
+	$input['facebook'] = wp_filter_nohtml_kses( $input['facebook'] );
+	//$input['linkedin'] = wp_filter_nohtml_kses( $input['linkedin'] );
 
 	return $input;
 }
