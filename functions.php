@@ -285,6 +285,11 @@ function ga() {
 	<?php
 	}
 }
+// automatically set links around inserted images to no link
+$image_set = get_option( 'image_default_link_type' );
+if (!$image_set == 'none') {
+	update_option('image_default_link_type', 'none');
+}
 
 /* Automatically add first image attached to a post as the featured image if post doesn't have a featured image already */
 //Borrowed from https://github.com/rachelbaker/bootstrapwp-Twitter-Bootstrap-for-WordPress
