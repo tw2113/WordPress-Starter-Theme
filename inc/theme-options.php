@@ -1,19 +1,19 @@
 <?php
-add_action( 'admin_init', 'theme_options_init' );
-add_action( 'admin_menu', 'theme_options_add_page' );
+add_action( 'admin_init', 'wpst_theme_options_init' );
+add_action( 'admin_menu', 'wpst_theme_options_add_page' );
 
 /** Init plugin options to white list our options */
-function theme_options_init(){
-	register_setting( 'wpst_options', 'wpst_theme_options', 'theme_options_validate' );
+function wpst_theme_options_init(){
+	register_setting( 'wpst_options', 'wpst_theme_options', 'wpst_theme_options_validate' );
 }
 
 /** Load up the menu page */
-function theme_options_add_page() {
-	add_theme_page( 'Theme Options', 'Theme Options', 'edit_theme_options', 'theme_options', 'theme_options_do_page' );
+function wpst_theme_options_add_page() {
+	add_theme_page( 'Theme Options', 'Theme Options', 'edit_theme_options', 'theme_options', 'wpst_theme_options_do_page' );
 }
 
 /** Create the options page */
-function theme_options_do_page() {
+function wpst_theme_options_do_page() {
 
 	if ( ! isset( $_REQUEST['settings-updated'] ) )
 		$_REQUEST['settings-updated'] = false;
@@ -54,7 +54,7 @@ function theme_options_do_page() {
 /**
  * Sanitize and validate input. Accepts an array, return a sanitized array.
  */
-function theme_options_validate( $input ) {
+function wpst_theme_options_validate( $input ) {
 	// Say our text option must be safe text with no HTML tags
 	$input['twitter'] = wp_filter_nohtml_kses( $input['twitter'] );
 	$input['facebook'] = wp_filter_nohtml_kses( $input['facebook'] );
