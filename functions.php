@@ -10,6 +10,12 @@ function wpst_setup() {
 	// This theme uses wp_nav_menu() in one location. Add more as needed
 	register_nav_menus( array( 'primary' => 'Primary Navigation' ) );
 }
+add_action('comment_form_before', 'wpst_comment_enqueue');
+function wpst_comment_enqueue() {
+	if(get_option( 'thread_comments' )) {
+		wp_enqueue_script( 'comment-reply' );
+	}
+}
 
 /*Register and enqueue javascript/styles*/
 add_action('wp_enqueue_scripts', 'wpst_load_scripts');

@@ -25,12 +25,7 @@
 <script src="<?php echo get_template_directory_uri(); ?>/js/selectivizr.js"></script>
 <![endif]--><!--Select-ivizr JS library for CSS3 selectors, DD-PNG fix for IE6-8-->
 
-<?php
-if ( is_singular() && get_option( 'thread_comments' ) )
-	wp_enqueue_script( 'comment-reply' );
-
-	wp_head();
-?>
+<?php wp_head(); ?>
 <!--
 // html5 Prefetch. Set the url to what page you want to automatically prefetch.
 Moz/Chrome 13+ (with alt syntax): Supported
