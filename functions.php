@@ -26,28 +26,6 @@ function wpst_load_scripts() {
 	//wp_enqueue_script('mailcheck', get_stylesheet_directory_uri().'/js/jquery.mailcheck.min.js', array('jquery'));
 }
 
-/** Post comments/excerpts alterations. *****************************/
-/** Sets the post excerpt length to 40 characters. */
-function wpst_excerpt_length( $length ) { return 40; }
-add_filter( 'excerpt_length', 'wpst_excerpt_length' );
-
-/** Returns a "Continue Reading" link for excerpts. */
-function wpst_continue_reading_link() {
-	return '<a href="'. get_permalink() . '"> Continue reading <span class="meta-nav">&rarr;</span></a>'; }
-/** Replaces "[...]" (appended to automatically generated excerpts) with an ellipsis and wpst_continue_reading_link(). */
-function wpst_auto_excerpt_more( $more ) {
-	return ' &hellip;' . wpst_continue_reading_link();
-}
-add_filter( 'excerpt_more', 'wpst_auto_excerpt_more' );
-/** Adds a pretty "Continue Reading" link to custom post excerpts. */
-function wpst_custom_excerpt_more( $output ) {
-	if ( has_excerpt() && ! is_attachment() ) {
-		$output .= wpst_continue_reading_link();
-	}
-	return $output;
-}
-add_filter( 'get_the_excerpt', 'wpst_custom_excerpt_more' );
-
 /** Template for comments and pingbacks. */
 function wpst_comment( $comment, $args, $depth ) {
 	$GLOBALS['comment'] = $comment;
@@ -103,7 +81,6 @@ function wpst_comment( $comment, $args, $depth ) {
 			break;
 	endswitch;
 }
-/** END Post comments/excerpts alterations. *****************************/
 
 /* Get wp_nav_menu() fallback, wp_page_menu(), to show home link. */
 function wpst_page_menu_args( $args ) {
