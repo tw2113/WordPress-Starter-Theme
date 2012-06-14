@@ -193,22 +193,6 @@ add_filter( 'post_class', 'wpst_additional_post_classes' );
 
 /*** Default Settings Cleanup and Adding Goodies **************************/
 
-/* adds the favicon/appleicon to the wp_head() call*/
-function wpst_favicons() {
-	echo '<link rel="shortcut icon" href="'.get_bloginfo('url').'/favicon.ico" />';
-	echo '<link rel="apple-touch-icon" href="'.get_bloginfo('url').'/apple-touch-icon.png" />';
-}
-add_action('wp_head', 'wpst_favicons');
-
-//Disable EditURI, WLWManifest, adjacent posts rel, and version generator
-function wpst_headcleanup() {
-	remove_action('wp_head', 'rsd_link');
-	remove_action('wp_head', 'wlwmanifest_link');
-	remove_action('wp_head', 'wp_generator');
-	remove_action('wp_head', 'adjacent_posts_rel_link_wp_head');
-	}
-add_action('init', 'wpst_headcleanup');
-
 /*	Checks to see if we should blame nacin
 	@return bool true if we should blame nacin, false if we shouldn't */
 function maybe_blame_nacin(){
@@ -251,12 +235,6 @@ function add_wpst_admin_bar_link($wp_admin_bar) {
 	) );
 }
 add_action('admin_bar_menu', 'add_wpst_admin_bar_link', 35);
-
-//Remove <p> tags from images
-function filter_ptags_on_images($content){
-    return preg_replace('/<p>\s*(<a .*>)?\s*(<img .* \/>)\s*(<\/a>)?\s*<\/p>/iU', '\1\2\3', $content);
-}
-add_filter('the_content', 'filter_ptags_on_images');
 
 // Admin Notice on Posts Page
 //add_action('admin_head-post.php', 'us2011_postspage_error_notice');

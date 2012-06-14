@@ -22,3 +22,9 @@ function wpst_favicons() {
 	echo '<link rel="apple-touch-icon" href="'.get_bloginfo('url').'/apple-touch-icon.png" />';
 }
 add_action('wp_head', 'wpst_favicons');
+
+//Remove <p> tags from images
+function filter_ptags_on_images($content){
+    return preg_replace('/<p>\s*(<a .*>)?\s*(<img .* \/>)\s*(<\/a>)?\s*<\/p>/iU', '\1\2\3', $content);
+}
+add_filter('the_content', 'filter_ptags_on_images');
