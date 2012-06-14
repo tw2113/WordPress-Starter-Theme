@@ -88,11 +88,6 @@ function wpst_page_menu_args( $args ) {
 	return $args;
 }
 add_filter( 'wp_page_menu_args', 'wpst_page_menu_args' );
-/** Remove inline styles printed when the gallery shortcode is used. */
-function wpst_remove_gallery_css( $css ) {
-	return preg_replace( "#<style type='text/css'>(.*?)</style>#s", '', $css );
-}
-add_filter( 'gallery_style', 'wpst_remove_gallery_css' );
 
 /** Prints HTML with meta information for the current post—date/time and author. */
 function wpst_posted_on() {
