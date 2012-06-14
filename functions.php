@@ -174,7 +174,7 @@ function wpst_browser_body_class($classes) {
 add_filter('body_class','wpst_browser_body_class');
 
 // Post numbering via post_class
-function wpst_additional_post_classes( $classes ) {
+function wpst_add_post_classes( $classes ) {
 	global $wp_query;
 
 	if( $wp_query->found_posts < 1 ) return $classes;
@@ -189,9 +189,7 @@ function wpst_additional_post_classes( $classes ) {
 
 	return $classes;
 }
-add_filter( 'post_class', 'wpst_additional_post_classes' );
-
-/*** Default Settings Cleanup and Adding Goodies **************************/
+add_filter( 'post_class', 'wpst_add_post_classes' );
 
 /*	Checks to see if we should blame nacin
 	@return bool true if we should blame nacin, false if we shouldn't */
@@ -268,11 +266,6 @@ function ga() {
 
 	<?php
 	}
-}
-// automatically set links around inserted images to no link
-$image_set = get_option( 'image_default_link_type' );
-if (!$image_set == 'none') {
-	update_option('image_default_link_type', 'none');
 }
 
 /* Automatically add first image attached to a post as the featured image if post doesn't have a featured image already */
