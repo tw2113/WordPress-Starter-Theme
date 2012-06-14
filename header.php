@@ -6,6 +6,7 @@
 <head>
 <meta charset="<?php bloginfo( 'charset' ); ?>" />
 <meta name="viewport" content="width=device-width" />
+<meta name="Description" content="<?php bloginfo('description'); ?>" />
 <title>
 <?php global $page, $paged;
 	wp_title( '|', true, 'right' );
@@ -23,14 +24,9 @@
 <script src="<?php echo get_template_directory_uri(); ?>/js/modernizr.custom.js"></script>
 <!--[if (gte IE 6)&(lte IE 8)]>
 <script src="<?php echo get_template_directory_uri(); ?>/js/selectivizr.js"></script>
-<![endif]--><!--Select-ivizr JS library for CSS3 selectors, DD-PNG fix for IE6-8-->
+<![endif]-->
 
 <?php wp_head(); ?>
-<!--
-// html5 Prefetch. Set the url to what page you want to automatically prefetch.
-Moz/Chrome 13+ (with alt syntax): Supported
-O/Saf/IE/: Not supported
-<link rel="prefetch" href="http://www.example.com/">-->
 </head>
 
 <body <?php body_class(); ?>>
