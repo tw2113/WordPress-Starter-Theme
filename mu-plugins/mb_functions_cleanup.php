@@ -24,7 +24,13 @@ function wpst_favicons() {
 add_action('wp_head', 'wpst_favicons');
 
 //Remove <p> tags from images
-function filter_ptags_on_images($content){
+function wpst_filter_ptags_on_images($content){
     return preg_replace('/<p>\s*(<a .*>)?\s*(<img .* \/>)\s*(<\/a>)?\s*<\/p>/iU', '\1\2\3', $content);
 }
-add_filter('the_content', 'filter_ptags_on_images');
+add_filter('the_content', 'wpst_filter_ptags_on_images');
+
+// automatically set links around inserted images to no link
+$image_set = get_option( 'image_default_link_type' );
+if (!$image_set == 'none') {
+	update_option('image_default_link_type', 'none');
+}
