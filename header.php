@@ -13,8 +13,8 @@
 	// Add the blog name.
 	bloginfo( 'name' );
 	$site_desc = get_bloginfo( 'description', 'display' );
-	if ( $site_description && ( is_home() || is_front_page() ) )
-		echo " | $site_description";
+	if ( $site_desc && ( is_home() || is_front_page() ) )
+		echo " | $site_desc";
 ?>
 </title>
 <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
