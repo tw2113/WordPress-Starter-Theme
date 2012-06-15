@@ -261,6 +261,38 @@ add_action('new_to_publish', 'wpst_autoset_featured_img');
 add_action('pending_to_publish', 'wpst_autoset_featured_img');
 add_action('future_to_publish', 'wpst_autoset_featured_img');
 
+$prefix = '_cmb_'; // Prefix for all fields
+function wpst_metaboxes( $meta_boxes ) {
+	global $prefix;
+	$meta_boxes[] = array(
+		'id' => 'test_metabox',
+		'title' => 'Test Metabox',
+		'pages' => array('page'), // post type
+		'context' => 'normal',
+		'priority' => 'high',
+		'show_names' => true, // Show field names on the left
+		'fields' => array(
+			array(
+				'name' => 'Test Text',
+				'desc' => 'field description (optional)',
+				'id' => $prefix . 'test_text',
+				'type' => 'text'
+			),
+		),
+	);
+
+	return $meta_boxes;
+}
+//add_filter( 'cmb_meta_boxes', 'wpst_metaboxes' );
+
+// Initialize the metabox class
+function wpst_initialize_cmb_meta_boxes() {
+	if ( !class_exists( 'cmb_Meta_Box' ) ) {
+		require_once( get_template_directory() . '/meta/init.php' );
+	}
+}
+//add_action( 'init', 'wpst_initialize_cmb_meta_boxes', 9999 );
+
 // Includes the widgets.php file that defines all widget based functions.
 require_once( get_template_directory() . '/widgets.php' );
 require_once( get_template_directory() . '/inc/theme-options.php' );
