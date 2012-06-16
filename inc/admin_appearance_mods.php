@@ -1,8 +1,7 @@
 <?php
 /*
 This file holds WordPress actions and filters that alter Admin areas.
-
-Comment out the add_action() lines to activate
+Remove comment //'s in front of the add_action() lines to activate
 */
 
 //Custom CSS for the WordPress login page
@@ -11,7 +10,7 @@ echo '<link rel="stylesheet" type="text/css" href="'.get_bloginfo('template_dire
 }
 //add_action('login_head', 'wpst_custom_login');
 
- //Customize Admin footer text
+//Customize Admin footer text
 function wpst_remove_footer_admin () {
     echo "You look very nice today.";
 }
@@ -41,19 +40,19 @@ function wpst_my_save_extra_profile_fields( $user_id ) {
 //add_action( 'personal_options_update', 'wpst_my_save_extra_profile_fields' );
 //add_action( 'edit_user_profile_update', 'wpst_my_save_extra_profile_fields' );
 
-/** Usage in template files **************/
-//echo get_the_author_meta('avatar', $user_id);
+/** Usage in template files **************
+echo get_the_author_meta('avatar', $user_id); */
 
 /*
 Instructions:
 
-Just put this snippet in the functions.php file of you theme. And note that the second and third of $admin_bar->add_menu are add sub menu to the first, and the parent parameter is set to the id of the first $admin_bar->add_menu, which in this case is my-item.
-
-Remove:
+Adding:
+Note that the second and third of $admin_bar->add_menu are add sub menu to the first, and the parent parameter is set to the id of the first $admin_bar->add_menu, which in this case is my-item.
+Removing:
 $admin_bar->remove_menu( 'slug' );
 For example you can remove the WordPress logo by using : $admin_bar->remove_menu( 'wp-logo' );
-
 */
+
 //add_action('admin_bar_menu', 'wpst_add_toolbar_items', 100);
 function wpst_add_toolbar_items($admin_bar){
 	$admin_bar->add_menu( array(
@@ -87,3 +86,16 @@ function wpst_add_toolbar_items($admin_bar){
 		),
 	));
 }
+// Change the "Posts" menu item to "Blog" or whatever you want
+function wpst_change_post_menu_label() {
+    global $menu;
+    global $submenu;
+    $menu[5][0] = 'Blog';
+    $submenu['edit.php'][5][0] = 'Posts';
+    $submenu['edit.php'][10][0] = 'Add Post';
+    $submenu['edit.php'][15][0] = 'Categories'; // Change name for categories
+    $submenu['edit.php'][16][0] = 'Tags'; // Change name for tags
+    echo '';
+}
+
+//add_action( 'admin_menu', 'wpst_change_post_menu_label' );
