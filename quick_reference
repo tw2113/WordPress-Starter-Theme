@@ -6,3 +6,8 @@
 //Get just the image source url of featured image.
 $imgsrc = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), "Full");
 echo $imgsrc[0];
+
+//If jQuery Cycle adds backgrounds to IECrappyVersion, add this
+$('#slideshow').cycle({
+    cleartype: false
+});
