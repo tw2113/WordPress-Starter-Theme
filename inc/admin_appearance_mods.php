@@ -97,5 +97,11 @@ function wpst_change_post_menu_label() {
     $submenu['edit.php'][16][0] = 'Tags'; // Change name for tags
     echo '';
 }
-
 //add_action( 'admin_menu', 'wpst_change_post_menu_label' );
+
+//Change text inside the post/page editor title field. Should be able to adapt as necessary.
+function title_text_input( $title ){
+	global $post;
+	return (($post->post_type == 'page') ? 'Foo' : 'Bar');
+}
+//add_filter( 'enter_title_here', 'title_text_input' );
