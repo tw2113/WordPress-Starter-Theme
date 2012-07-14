@@ -34,3 +34,12 @@ $image_set = get_option( 'image_default_link_type' );
 if (!$image_set == 'none') {
 	update_option('image_default_link_type', 'none');
 }
+
+// unset some of the default dashboard widgets that are never needed for clients
+function remove_dashboard_widgets(){
+  global$wp_meta_boxes;
+  unset($wp_meta_boxes['dashboard']['normal']['core']['dashboard_plugins']); //non-installed plugin information
+  unset($wp_meta_boxes['dashboard']['side']['core']['dashboard_primary']); //WordPress Blog
+  unset($wp_meta_boxes['dashboard']['side']['core']['dashboard_secondary']); //Other WordPress News
+}
+add_action('wp_dashboard_setup', 'remove_dashboard_widgets');
