@@ -13,6 +13,7 @@
 		<?php the_content(); ?>
 
 		<?php edit_post_link( 'Edit', '', '' ); ?>
+
 	</article>
 	<?php endwhile; endif; ?>
 <?php get_sidebar(); ?>
