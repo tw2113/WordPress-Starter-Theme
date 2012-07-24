@@ -21,21 +21,22 @@ add_action( 'widgets_init', 'wpst_widgets_init' );
 
 //deregisters widgets
 function wpst_remove_wp_widgets(){
-  unregister_widget('WP_Widget_Archives');
-  unregister_widget('WP_Widget_Calendar');
-  unregister_widget('WP_Widget_Categories');
-  unregister_widget('WP_Widget_Links');
-  unregister_widget('WP_Widget_Meta');
-  unregister_widget('WP_Widget_Pages');
-  unregister_widget('WP_Widget_Recent_Comments');
-  unregister_widget('WP_Widget_Recent_Posts');
-  unregister_widget('WP_Widget_RSS');
-  unregister_widget('WP_Widget_Search');
-  unregister_widget('WP_Widget_Tag_Cloud');
-  unregister_widget('WP_Nav_Menu_Widget');
+if(is_admin()) {
+	unregister_widget('WP_Widget_Archives');
+	unregister_widget('WP_Widget_Calendar');
+	unregister_widget('WP_Widget_Categories');
+	unregister_widget('WP_Widget_Links');
+	unregister_widget('WP_Widget_Meta');
+	unregister_widget('WP_Widget_Pages');
+	unregister_widget('WP_Widget_Recent_Comments');
+	unregister_widget('WP_Widget_Recent_Posts');
+	unregister_widget('WP_Widget_RSS');
+	unregister_widget('WP_Widget_Search');
+	unregister_widget('WP_Widget_Tag_Cloud');
+	unregister_widget('WP_Nav_Menu_Widget');
 }
-
-//add_action('widgets_init', 'wpst_remove_wp_widgets', 1);
+}
+add_action('widgets_init', 'wpst_remove_wp_widgets', 1);
 
 /*
 //Add a proper class name and widget name. Class name is for the extension of the WP_Widget, and for registering the widget.
