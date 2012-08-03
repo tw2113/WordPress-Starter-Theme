@@ -277,7 +277,7 @@ require_once( get_template_directory() . '/widgets.php' );
 require_once( get_template_directory() . '/inc/theme-options.php' );
 require_once( get_template_directory() . '/inc/admin_appearance_mods.php' );
 
-/* Example theme options usage:
-$options = get_option('wpst_theme_options');
-echo $option['twitter'];
-*/
+//Adding mail class files
+require_once( get_template_directory() . '/inc/mail/func/functions.func.php');
+require_once( get_template_directory() . '/inc/mail/class/notices.class.php');
+require_once( get_template_directory() . '/inc/mail/class/form.class.php');

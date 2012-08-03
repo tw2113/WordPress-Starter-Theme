@@ -11,3 +11,7 @@ echo $imgsrc[0];
 $('#slideshow').cycle({
     cleartype: false
 });
+
+/* Example theme options usage: */
+$options = get_option('wpst_theme_options');
+echo $option['twitter'];
