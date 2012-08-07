@@ -31,7 +31,11 @@ $options->addOption('male', 'Male');
 $myForm->fields['your-gender']->addOption('female', 'Female');
 $myForm->fields['your-gender']->addOption('other', 'Other');
 
+$myForm->setTextArea(array('name'=>'your-comments'), 'Comments', true);
+
 $myForm->setInputField(array('name'=>'submit', 'value'=>'Submit', 'type'=>'Submit'));
+
+$myForm->setHtmlSnippet('Thanks for looking at my form!');
 
 
 if($myForm->isSent() && $myForm->validInput()){
@@ -46,9 +50,10 @@ if($myForm->isSent() && $myForm->validInput()){
 	<title>PHP - HTML5 Form Class</title> 
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-	<link rel="stylesheet" href="/css/style.css?v=1"> 
+	<link rel="stylesheet" href="css/style.css?v=1"> 
 </head> 
 <body>
+<h1>PHP - HTML5 Form Class</h1>
 <?php
 	if(is_array($notices->notices)){ // If there is an notice to display.
 		$notices->display();

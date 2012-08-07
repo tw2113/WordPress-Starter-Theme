@@ -2,7 +2,7 @@
 
 /**
  * Form makes/validates forms
- * V1.0
+ * V1.1
  *
  * This generates HTML5 forms & validates them.
  *
@@ -26,7 +26,7 @@ class form{
 	public function __construct($form_attr=''){
 		// Set some deafult attributes
 		$defaults = array('name'=>'form-name', 'method'=>'post', 'action'=>'', 'enctype'=>'application/x-www-form-urlencoded');
-		$this->form_attr = array_merge($defaults, parseAStr($form_attr));
+		$this->form_attr = $this->mergeAttr($defaults, $form_attr);
 
 		// Set a hidden field to figure out if this form has been posted.
 		$this->setInputField(array('name'=>$this->form_attr['name'], 'type'=>'hidden', 'value'=>'true'));
@@ -41,40 +41,44 @@ class form{
 	
 	public function setInputField($attr, $cuteName='', $label=false){
 		$defaults = array('name'=>'field-name', 'type'=>'text', 'value'=>'', 'placeholder'=>'');
-		$attr = array_merge($defaults, parseAStr($attr));
-		$name = $attr['name'];
+		$attr = $this->mergeAttr($defaults, $attr);
 		
 		// set the field class
-		$this->fields[$name] = new inputField($attr, $cuteName, $label);
-		
-		return $this->fields[$name];
+		return $this->fields[$attr['name']] = new inputField($attr, $cuteName, $label);
 	}
 	
 	public function setSelectField($attr, $cuteName='', $label=false){
 		$defaults = array('name'=>'field-name', 'value'=>'');
-		$attr = array_merge($defaults, parseAStr($attr));
-		$name = $attr['name'];
+		$attr = $this->mergeAttr($defaults, $attr);
 		
 		// set the field class
-		$this->fields[$name] = new selectField($attr, $cuteName, $label);
-		return $this->fields[$name];
+		return $this->fields[$attr['name']] = new selectField($attr, $cuteName, $label);
 	}
 	
 	public function setTextArea($attr, $cuteName='', $label=false){
 		$defaults= array('name'=>'field-name', 'type'=>'text', 'value'=>'', 'placeholder'=>'');
-		$attr = array_merge($defaults, parseAStr($attr));
-		$name = $attr['name'];
+		$attr = $this->mergeAttr($defaults, $attr);
 		
 		// set the field class
-		$this->fields[$name] = new textArea($attr, $cuteName, $label);
-		
-		return $this->fields[$name];
+		return $this->fields[$attr['name']] = new textArea($attr, $cuteName, $label);
 	}
 	
 	public function setHtmlSnippet($html=''){
-		$this->fields[] = new htmlSnippet($html);
+		return $this->fields[] = new htmlSnippet($html);
+	}
+	
+	private function mergeAttr($defaults, $attr){
+		if(is_array($attr)){
+			$attr = array_replace($defaults, parseAStr($attr));
+		} else {
+			$attr = array_replace($defaults, parseAStr($attr));
+		}
 		
-		return $this->fields[$name];
+		// Set the ID if we need to:
+		if(!isset($attr['id']) && is_array($this->form_attr)){
+			$attr['id'] = $this->form_attr['name'].'_'.$attr['name'];
+		}
+		return $attr;
 	}
 	
 	// Check if the form has been sent.
@@ -191,21 +195,26 @@ class form{
 	}
 }
 
-class inputField extends form{
+class inputField{
 	public $attr, $cuteName, $label;
 	
 	public function __construct($attr, $cuteName='', $label=true){
 		$this->attr = $attr;
 		$this->cuteName = $cuteName;
 		$this->label = $label;
+		$this->html = '';
 	}
 	
 	public function getHTML(){
-		$return = '<input'.parent::getAttrs($this->attr).'/>';
+		$this->html = '<input'.form::getAttrs($this->attr).'/>';
+		$this->addWrapper();
+		return $this->html;
+	}
+	
+	public function addWrapper(){
 		if($this->label != false){
-			$return = '<label for="'.$this->attr['name'].'">'.$this->cuteName.$return.'</label>';
+			$this->html = '<label for="'.$this->attr['id'].'">'.$this->cuteName.'</label><div>'.$this->html.'</div>';
 		}
-		return $return;
 	}
 }
 
@@ -216,16 +225,13 @@ class textArea extends inputField{
 		$value = $this->attr['value'];
 		unset($this->attr['value']);
 		
-		$return = '<textarea'.parent::getAttrs($this->attr).'>'.$value.'</textarea>';
+		$this->html = '<textarea'.form::getAttrs($this->attr).'>'.$value.'</textarea>';
 		
 		// set $this->attr['value']  agan.
 		$this->attr['value'] = $value;
 		
-		if($this->label != false){
-			$return = '<label for="'.$this->attr['name'].'">'.$this->cuteName.$return.'</label>';
-		}
-		
-		return $return;
+		$this->addWrapper();
+		return $this->html;
 	}
 }
 
@@ -242,20 +248,17 @@ class selectField extends inputField{
 	public function getHTML(){
 		unset($this->attr['value']); // Remove the value attr
 		
-		$return = '<select'.parent::getAttrs($this->attr).'>';
+		$this->html = '<select'.form::getAttrs($this->attr).'>';
 		
 		// Cycle through the options
 		if(is_array($this->options)){foreach($this->options as $option => $values){
-			$return .= '<option value="'.$option.'" '.(($values['selected'] == false) ? '' : 'selected').'>'.$values['displayName'].'</option>';
+			$this->html .= '<option value="'.$option.'" '.(($values['selected'] == false) ? '' : 'selected').'>'.$values['displayName'].'</option>';
 		}}
 		
-		$return .= '</select>';
+		$this->html .= '</select>';
 		
-		if($this->label != false){
-			$return = '<label for="'.$this->attr['name'].'">'.$this->cuteName.$return.'</label>';
-		}
-		
-		return $return;
+		$this->addWrapper();
+		return $this->html;
 	}
 }
 

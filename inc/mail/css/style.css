@@ -1,12 +1,20 @@
+body{	
+	padding: 20px;
+}
 form{
-	width: 400px;
+	width: 450px;
 }
-label{
+form > label, form > div{
+	width: 50%;
+	float: left;
 	display:block;
-	margin:15px 0;
+	margin:15px 0 5px 0;
 }
-input,select{
+input,select, textarea{
 	padding: 3px 5px;
-	float:right;
+	float:left;
 	width: 200px;
+}
+input[type="submit"]{
+	margin: 15px 0 0 50%
 }
