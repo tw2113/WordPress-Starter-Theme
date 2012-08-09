@@ -15,3 +15,7 @@ $('#slideshow').cycle({
 /* Example theme options usage: */
 $options = get_option('wpst_theme_options');
 echo $option['twitter'];
+
+//hide slides at first with cycle
+#slideshow img { display: none }
+#slideshow img.first { display: block }
