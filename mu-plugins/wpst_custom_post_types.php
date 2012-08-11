@@ -10,28 +10,28 @@ Version: 2.113
 add_action( 'init', 'wpst_create_my_post_types' );
 
 function wpst_create_my_post_types() {
-	register_post_type( 'GALLERY',
+	register_post_type( 'testimonials',
 		array(
 			'labels' => array(
-			'name' => __( 'Galleries' ),
-			'singular_name' => __( 'Gallery' ),
-			'add_new' => __( 'New Gallery' ),
-			'add_new_item' => __( 'Add New Gallery' ),
+			'name' => __( 'Testimonials' ),
+			'singular_name' => __( 'Testimonial' ),
+			'add_new' => __( 'New Testimonial' ),
+			'add_new_item' => __( 'Add New Testimonial' ),
 			'edit' => __( 'Change' ),
-			'edit_item' => __( 'Change the Gallery' ),
-			'new_item' => __( 'A New Gallery' ),
+			'edit_item' => __( 'Change the Testimonial' ),
+			'new_item' => __( 'A New Testimonial' ),
 			'view' => __( 'See' ),
-			'view_item' => __( 'See the Gallery' ),
-			'search_items' => __( 'Search Galleries' ),
-			'not_found' => __( 'No Gallery to display' ),
-			'not_found_in_trash' => __( 'No Galleries discarded' ),
-			'parent' => __( 'Parent Gallery' ),
+			'view_item' => __( 'See the Testimonial' ),
+			'search_items' => __( 'Search Testimonials' ),
+			'not_found' => __( 'No Testimonial to display' ),
+			'not_found_in_trash' => __( 'No Testimonials discarded' ),
+			'parent' => __( 'Parent Testimonial' ),
 			'_builtin' => false, // It's a custom post type, not built in!
-			'rewrite' => array('slug' => 'gallery', 'with_front' => FALSE), // Permalinks format
+			'rewrite' => array('slug' => 'testimonial', 'with_front' => FALSE), // Permalinks format
 			),
 			'public' => true,
 			'show_ui' => true,
-			'description' => __( 'Galleries for displaying your work' ),
+			'description' => __( 'Testimonials for displaying your work' ),
 			'query_var' => true,
 			'supports' => array( 'title', 'editor', 'custom-fields', 'thumbnail' ),
 			//'menu_icon' => get_stylesheet_directory_uri() . '/images/images_icon.png',
