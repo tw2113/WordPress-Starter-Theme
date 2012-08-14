@@ -18,8 +18,6 @@
 ?>
 </title>
 <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
-<link rel="stylesheet" href="<?php echo get_stylesheet_directory_uri();?>/css/normalize.css" media="all" />
-<link rel="stylesheet" href="<?php bloginfo( 'stylesheet_url' ); ?>" media="all" />
 <script src="<?php echo get_template_directory_uri(); ?>/js/prefixfree.min.js"></script>
 <script src="<?php echo get_template_directory_uri(); ?>/js/modernizr.custom.js"></script>
 <!--[if (gte IE 6)&(lte IE 8)]>
