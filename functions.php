@@ -26,8 +26,8 @@ function wpst_load_scripts() {
 	//wp_enqueue_script('mailcheck', get_stylesheet_directory_uri().'/js/jquery.mailcheck.min.js', array('jquery'));
 
 	//Enqueue styles
-	wp_enqueue_style('normalize', get_stylesheet_directory_uri().'/css/normalize.css');
-	wp_enqueue_style('style', get_bloginfo('stylesheet_url'), 'normalize');
+	wp_enqueue_style('normalize', get_stylesheet_directory_uri().'/css/normalize.css', '', 'all');
+	wp_enqueue_style('style', get_bloginfo('stylesheet_url'), 'normalize', '', 'all');
 }
 
 /** Template for comments and pingbacks. */
