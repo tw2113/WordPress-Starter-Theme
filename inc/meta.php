@@ -5,11 +5,11 @@ function cmb_initialize_cmb_meta_boxes() {
 		require_once( get_template_directory() . '/meta/init.php');
 }
 $prefix = '_'; // Prefix for all fields
-function NAME_quote_metaboxes( $meta_boxes ) {
+function wpst_metaboxes( $meta_boxes ) {
 	global $prefix;
 	$meta_boxes[] = array(
 
 	);
 	return $meta_boxes;
 }
-add_filter( 'cmb_meta_boxes', 'NAME_quote_metaboxes' );
+add_filter( 'cmb_meta_boxes', 'wpst_metaboxes' );

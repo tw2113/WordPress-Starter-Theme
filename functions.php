@@ -211,13 +211,13 @@ function add_wpst_admin_bar_link($wp_admin_bar) {
 add_action('admin_bar_menu', 'add_wpst_admin_bar_link', 35);
 
 // Admin Notice on Posts Page
-//add_action('admin_head-post.php', 'us2011_postspage_error_notice');
-function us2011_postspage_error_notice() {
+//add_action('admin_head-post.php', 'wpst_postspage_error_notice');
+function wpst_postspage_error_notice() {
     $postspage = get_option('page_for_posts');
     if (!empty($postspage))
-        add_action('admin_notices', 'us2011_postspage_print_notices');
+        add_action('admin_notices', 'wpst_postspage_print_notices');
 }
-function us2011_postspage_print_notices() {
+function wpst_postspage_print_notices() {
     $postspage = get_option('page_for_posts');
     // show this only if we're editing the posts page
     if (!empty($postspage) && isset($_GET['action']) && $_GET['action'] == 'edit' && $_GET['post'] == $postspage)
@@ -244,43 +244,11 @@ function ga() {
 	}
 }
 
-$prefix = '_cmb_'; // Prefix for all fields
-function wpst_metaboxes( $meta_boxes ) {
-	global $prefix;
-	$meta_boxes[] = array(
-		'id' => 'test_metabox',
-		'title' => 'Test Metabox',
-		'pages' => array('page'), // post type
-		'context' => 'normal',
-		'priority' => 'high',
-		'show_names' => true, // Show field names on the left
-		'fields' => array(
-			array(
-				'name' => 'Test Text',
-				'desc' => 'field description (optional)',
-				'id' => $prefix . 'test_text',
-				'type' => 'text'
-			),
-		),
-	);
-
-	return $meta_boxes;
-}
-//add_filter( 'cmb_meta_boxes', 'wpst_metaboxes' );
-
-// Initialize the metabox class
-function wpst_initialize_cmb_meta_boxes() {
-	if ( !class_exists( 'cmb_Meta_Box' ) ) {
-		require_once( get_template_directory() . '/meta/init.php' );
-	}
-}
-//add_action( 'init', 'wpst_initialize_cmb_meta_boxes', 9999 );
-
 // Includes the widgets.php file that defines all widget based functions.
 require_once( get_template_directory() . '/widgets.php' );
 require_once( get_template_directory() . '/inc/theme-options.php' );
 require_once( get_template_directory() . '/inc/admin_appearance_mods.php' );
-//require_once( get_template_directory() . '/inc/meta.php' );
+require_once( get_template_directory() . '/inc/meta.php' );
 
 //Adding mail class files
 require_once( get_template_directory() . '/inc/mail/func/functions.func.php');
