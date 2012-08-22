@@ -7,12 +7,10 @@ Author: Michael Beckwith
 Author URI: http://michaelbox.net
 */
 
+/* If you know how to use SASS, please use the sass/style.scss file for edits and delete the styles below. If you do not know how to use SASS, just add your changes here. */
+
 /*@import url("css/hardboiledmediaqueries.0.9.css");*/
 /** Put your custom @font-face font declarations in here ****************/
-
-/* If using SASS at all, remove everything below and use that stylesheet for styling. The comment block above needs to remain though.
-
-/**/
 /** Typography ****************/
 h1, h2, h3, h4, h5, h6 { font-weight:bold } /* This helps to identify headings at the initial build stage, so I thought it'd be useful to have it */
 .alert { background:red; color:white } /* 'alert' has a basic style, since it's useful to have it standing out for testing purposes.*/
