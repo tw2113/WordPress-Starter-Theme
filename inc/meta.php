@@ -7,9 +7,9 @@ function cmb_initialize_cmb_meta_boxes() {
 $prefix = '_'; // Prefix for all fields
 function wpst_metaboxes( $meta_boxes ) {
 	global $prefix;
-	$meta_boxes[] = array(
+	/*$meta_boxes[] = array(
 
-	);
+	);*/
 	return $meta_boxes;
 }
 add_filter( 'cmb_meta_boxes', 'wpst_metaboxes' );
