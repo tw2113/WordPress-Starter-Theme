@@ -28,6 +28,7 @@ function wpst_load_scripts() {
 	//Enqueue styles
 	wp_enqueue_style('normalize', get_stylesheet_directory_uri().'/css/normalize.css', null, 'all');
 	wp_enqueue_style('style', get_bloginfo('stylesheet_url'), 'normalize', null, 'all');
+	//wp_enqueue_style('sass', get_stylesheet_directory_uri().'/stylesheets/style.css', 'normalize', null, 'all');
 }
 
 /** Template for comments and pingbacks. */
