@@ -280,6 +280,7 @@ function wpst_initialize_cmb_meta_boxes() {
 require_once( get_template_directory() . '/widgets.php' );
 require_once( get_template_directory() . '/inc/theme-options.php' );
 require_once( get_template_directory() . '/inc/admin_appearance_mods.php' );
+//require_once( get_template_directory() . '/inc/meta.php' );
 
 //Adding mail class files
 require_once( get_template_directory() . '/inc/mail/func/functions.func.php');
