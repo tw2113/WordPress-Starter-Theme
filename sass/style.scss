@@ -61,6 +61,12 @@ body { font-size: 16px; font-size: 1.6rem; } /* =16px */
 	margin: 0 auto;
 	width: 960px;
 }
+a {
+	-webkit-transition: color 0.3s;
+    -moz-transition:    color 0.3s;
+    -o-transition:      color 0.3s;
+    transition:         color 0.3s;
+}
 
 /** WordPress Nav Menu Selectors ****************/
 nav #menu-primary {
